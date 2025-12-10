@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-VerTaskApplication<vertask>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "br.cefetmg.vertask.VerTaskApplication",
+            "projectName": "vertask",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
