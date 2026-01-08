@@ -1,0 +1,484 @@
+.task-details {
+  padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-title {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  
+  .title-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 300;
+      margin: 0;
+      color: var(--ion-color-dark);
+    }
+    
+    .favorite-badge {
+      align-self: flex-start;
+      background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+      color: white;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+      animation: pulse 2s infinite;
+      
+      ion-icon {
+        font-size: 0.9rem;
+        margin-right: 4px;
+      }
+    }
+  }
+  
+  .favorite-btn {
+    --color: #718096;
+    --color-hover: #e53e3e;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    
+    ion-icon {
+      font-size: 2rem;
+      transition: all 0.3s ease;
+      
+      &.favorited {
+        color: #e53e3e;
+        animation: heartBeat 0.6s ease-in-out;
+      }
+      
+      &:not(.favorited) {
+        color: #718096;
+        
+        &:hover {
+          color: #e53e3e;
+          transform: scale(1.1);
+        }
+      }
+    }
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .chat-btn {
+    --color: #2563eb;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    position: relative;
+    
+    ion-icon {
+      font-size: 2rem;
+      color: #2563eb;
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      
+      ion-icon {
+        color: #1e40af;
+      }
+    }
+
+    .chat-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+      font-size: 0.5rem;
+      font-weight: 700;
+      box-shadow: 0 3px 8px rgba(239, 68, 68, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+      animation: pulse-badge 2s infinite;
+      border: 2px solid white;
+    }
+  }
+}
+
+.section {
+  margin-bottom: 30px;
+  
+  h3 {
+    font-size: 1.1rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: var(--ion-color-dark);
+    margin: 0;
+  }
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  
+  ion-icon {
+    font-size: 1.2rem;
+    color: var(--ion-color-medium);
+    margin-top: 2px;
+  }
+  
+  .label {
+    font-size: 1.1rem;
+    color: var(--ion-color-medium);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+  }
+  
+  p {
+    font-size: 1rem;
+    color: var(--ion-color-dark);
+    margin: 0;
+  }
+}
+
+.prazo-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.prazo-data {
+  margin: 0;
+}
+
+.badge-atraso {
+  --background: #e53e3e;
+  --color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+/* Make client name look clickable and show pointer on hover */
+.cliente-link {
+  cursor: pointer;
+  color: var(--ion-color-primary, #2563eb);
+  text-decoration: none; /* remove underline */
+  font-weight: 600;
+}
+.cliente-link:hover, .cliente-link:focus {
+  opacity: 0.95;
+  text-decoration: none;
+  filter: brightness(1.05);
+}
+
+.action-buttons {
+  margin-top: auto;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bottom-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  
+  ion-button:first-child {
+    flex: 0 0 auto;
+  }
+  
+  ion-button:last-child {
+    flex: 1;
+  }
+}
+
+
+.section-title {
+  text-align: center;
+  width: 100%;
+  font-size: 1.5em;;
+  font-weight: bold;
+  margin: 24px 0 16px 0
+}
+// Grid principal dividido em duas colunas
+.inicio-admin-grid {
+  display: flex;
+  gap: 32px;
+  margin: 15px;
+}
+.inicio-admin-col-esquerda {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.inicio-admin-col-direita {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+// Linha do título e busca
+.title-search-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+// Cabeçalho
+.logo-title {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 30px;
+}
+
+// Animação para o coração
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+// Animação para o badge de favorita
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(229, 62, 62, 0.6);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(229, 62, 62, 0.3);
+  }
+}
+
+// Estilos adicionais para melhor UX
+.favorite-btn {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --border-radius: 50%;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+  .chat-btn {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ion-color-primary, #2563eb);
+    transition: transform 0.12s ease, color 0.12s ease;
+  }
+
+  .chat-btn ion-icon {
+    font-size: 1.5rem;
+  }
+
+  .chat-btn:hover {
+    transform: scale(1.06);
+  }
+
+// Responsividade
+@media (max-width: 768px) {
+  .task-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    position: relative;
+    
+    .title-container {
+      width: 100%;
+      padding-right: 60px;
+    }
+    
+    .favorite-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+    
+    .favorite-badge {
+      font-size: 0.75rem !important;
+      padding: 4px 8px !important;
+    }
+  }
+  
+  .task-title .title-container h1 {
+    font-size: 2rem;
+  }
+}
+
+.status-concluida {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #059669;
+  padding: 12px;
+  background: rgba(16, 185, 129, 0.12);
+  border-radius: 12px;
+}
+
+.status-concluida ion-icon {
+  font-size: 1.4rem;
+}
+
+/* Attachment (anexo) styles */
+.attachment-card {
+  background: var(--ion-background-color);
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 10px;
+  padding: 14px;
+  margin: 12px 0 20px 0;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+
+.attachment-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.attachment-name {
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin: 0;
+}
+
+.attachment-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.attachment-actions ion-button {
+  --border-radius: 8px;
+}
+
+.pdf-viewer {
+  margin-top: 8px;
+}
+
+.pdf-iframe {
+  width: 100%;
+  height: 70vh; /* responsive height */
+  min-height: 320px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* PDF.js viewer styles */
+.pdf-viewer {
+  margin-top: 14px;
+}
+
+.pdf-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.pdf-pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-info {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.pdf-controls ion-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+}
+
+.pdf-canvas-wrap {
+  position: relative;
+  background: #e6eefc;
+  padding: 12px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 320px;
+}
+
+.pdf-canvas {
+  max-width: 100%;
+  box-shadow: 0 8px 18px rgba(2,6,23,0.08);
+  border-radius: 6px;
+}
+
+.pdf-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.6);
+  color: #0f172a;
+  font-weight: 600;
+}
+
+// Animação de pulse para o badge de nova mensagem
+@keyframes pulse-badge {
+  0%, 100% {
+    box-shadow: 0 3px 8px rgba(239, 68, 68, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.8), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    transform: scale(1.08);
+  }
+}

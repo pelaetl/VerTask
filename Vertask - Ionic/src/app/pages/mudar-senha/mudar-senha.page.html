@@ -1,0 +1,59 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Alterar senha</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Alterar senha</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="center-wrap">
+    <div class="card glass-card">
+      <h1>Alterar senha</h1>
+      <p class="lead">Insira sua nova senha e confirme para concluir a recuperação.</p>
+     
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <ion-item lines="none" class="form-item">
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-input
+            [type]="mostrarNova ? 'text' : 'password'"
+            placeholder="Nova senha"
+            autocomplete="new-password"
+            formControlName="novaSenha"
+            (keyup.enter)="submit()"
+          ></ion-input>
+          <ion-button fill="clear" slot="end" size="small" (click)="toggleNovaSenha()" class="toggle-btn" [attr.aria-label]="mostrarNova ? 'Ocultar senha' : 'Mostrar senha'">
+            <ion-icon [name]="mostrarNova ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <ion-item lines="none" class="form-item">
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-input
+            [type]="mostrarConfirmar ? 'text' : 'password'"
+            placeholder="Confirmar senha"
+            autocomplete="new-password"
+            formControlName="confirmarSenha"
+            (keyup.enter)="submit()"
+          ></ion-input>
+          <ion-button fill="clear" slot="end" size="small" (click)="toggleConfirmarSenha()" class="toggle-btn" [attr.aria-label]="mostrarConfirmar ? 'Ocultar senha' : 'Mostrar senha'">
+            <ion-icon [name]="mostrarConfirmar ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <div *ngIf="form.get('novaSenha')?.touched && form.get('novaSenha')?.hasError('minlength')" class="error">A senha deve ter ao menos 4 caracteres.</div>
+        <div *ngIf="form.get('confirmarSenha')?.touched && form.get('confirmarSenha')?.value !== form.get('novaSenha')?.value" class="error">As senhas não coincidem.</div>
+
+        <ion-button expand="block" class="primary-btn ion-margin-top" type="submit" [disabled]="form.invalid || (form.get('confirmarSenha')?.value !== form.get('novaSenha')?.value)">
+          Enviar
+        </ion-button>
+
+        <a routerLink="/login" class="link-secondary">ou faça login</a>
+      </form>
+    </div>
+  </div>
+</ion-content>

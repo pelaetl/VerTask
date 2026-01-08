@@ -1,0 +1,85 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <div class="title-search-row">
+      <ion-router-link routerLink="/empresas" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="tarefa-content">
+  <h2 class="section-title">EDITAR CLIENTE</h2>
+
+  <ion-spinner *ngIf="carregando" class="spinner-center"></ion-spinner>
+
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()" class="tarefa-form" *ngIf="!carregando">
+    <div class="form-container">
+      <!-- Tipo de Cliente (desabilitado) -->
+      <div class="form-field">
+        <label class="field-label">Tipo de Cliente</label>
+        <ion-select formControlName="tipo" [disabled]="true" class="custom-select">
+          <ion-select-option value="empresa">Empresa</ion-select-option>
+          <ion-select-option value="pessoa">Pessoa Física</ion-select-option>
+        </ion-select>
+      </div>
+
+      <!-- Nome -->
+      <div class="form-field">
+        <label class="field-label">Nome</label>
+        <ion-input formControlName="nome" type="text" placeholder="Nome do cliente" class="custom-input"></ion-input>
+      </div>
+
+      <!-- CNPJ/CPF (desabilitado) -->
+      <div class="form-field">
+        <label class="field-label">{{ formGroup.get('tipo')?.value === 'empresa' ? 'CNPJ' : 'CPF' }}</label>
+        <ion-input 
+          formControlName="{{ formGroup.get('tipo')?.value === 'empresa' ? 'cnpj' : 'cpf' }}" 
+          type="text" 
+          [disabled]="true"
+          class="custom-input"
+        ></ion-input>
+      </div>
+
+      <!-- Nome Fantasia (apenas para empresa) -->
+      <div class="form-field" *ngIf="formGroup.get('tipo')?.value === 'empresa'">
+        <label class="field-label">Nome Fantasia</label>
+        <ion-input formControlName="nomeFantasia" type="text" placeholder="Nome fantasia" class="custom-input"></ion-input>
+      </div>
+
+      <!-- Endereço -->
+      <div class="form-field">
+        <label class="field-label">Endereço</label>
+        <ion-input formControlName="endereco" type="text" placeholder="Rua, número, complemento" class="custom-input"></ion-input>
+      </div>
+
+      <!-- Telefone -->
+      <div class="form-field">
+        <label class="field-label">Telefone</label>
+        <ion-input formControlName="telefone" type="tel" placeholder="(00) 0000-0000" class="custom-input"></ion-input>
+      </div>
+
+      <!-- E-mail -->
+      <div class="form-field">
+        <label class="field-label">E-mail</label>
+        <ion-input formControlName="email" type="email" placeholder="cliente@example.com" class="custom-input"></ion-input>
+      </div>
+
+      <!-- Honorário -->
+      <div class="form-field">
+        <label class="field-label">Honorário</label>
+        <ion-input formControlName="honorario" type="number" placeholder="0.00" class="custom-input"></ion-input>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <ion-button type="button" expand="block" color="danger" (click)="cancelar()" class="btn-limpar">
+        Cancelar
+      </ion-button>
+      <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid" class="btn-confirmar">
+        Salvar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

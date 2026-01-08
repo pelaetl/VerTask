@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Cliente</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cliente-modal-content">
+  <div class="cliente-card">
+    <h2 class="cliente-name">{{ cliente?.nome || '-' }}</h2>
+    <div class="cliente-row">
+      <span class="label">Tipo</span>
+      <span class="value">{{ cliente?.tipo === 'empresa' ? 'Empresa' : 'Pessoa' }}</span>
+    </div>
+
+    <div *ngIf="cliente?.nomeFantasia" class="cliente-row">
+      <span class="label">Nome fantasia</span>
+      <span class="value">{{ cliente?.nomeFantasia }}</span>
+    </div>
+
+    <div *ngIf="cliente?.cnpj" class="cliente-row">
+      <span class="label">CNPJ</span>
+      <span class="value">{{ formatCnpjCpf(cliente?.cnpj) }}</span>
+    </div>
+
+    <div *ngIf="cliente?.cpf" class="cliente-row">
+      <span class="label">CPF</span>
+      <span class="value">{{ formatCnpjCpf(cliente?.cpf) }}</span>
+    </div>
+
+    <div *ngIf="cliente?.endereco" class="cliente-row">
+      <span class="label">Endereço</span>
+      <span class="value">{{ cliente?.endereco }}</span>
+    </div>
+
+    <div *ngIf="cliente?.telefone" class="cliente-row">
+      <span class="label">Telefone</span>
+      <span class="value">{{ formatPhone(cliente?.telefone) }}</span>
+    </div>
+
+    <div *ngIf="cliente?.email" class="cliente-row">
+      <span class="label">E-mail</span>
+      <span class="value">{{ cliente?.email }}</span>
+    </div>
+
+  </div>
+</ion-content>

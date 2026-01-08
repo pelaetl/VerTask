@@ -1,0 +1,110 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">VerTask</ion-router-link>
+    </div>
+    <ion-buttons slot="end">
+      <ion-button (click)="carregarEmpresas()" title="Recarregar">
+        <ion-icon name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="tarefas-header">
+    <h2 class="section-title">Relatório de Clientes</h2>
+    <div class="tarefas-filtros">
+      <ion-searchbar placeholder="Buscar por cliente" [value]="searchTerm" (ionInput)="onSearchChange($event)" class="tarefas-searchbar" show-clear-button="focus"></ion-searchbar>
+      <div class="tarefas-filtros-secundarios">
+        <div class="tarefas-date-input">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-datetime-button datetime="relatorio-empresa-data-inicio" class="tarefas-date-button"></ion-datetime-button>
+          <span class="date-separator">até</span>
+          <ion-datetime-button datetime="relatorio-empresa-data-fim" class="tarefas-date-button"></ion-datetime-button>
+          <ion-button fill="clear" size="small" color="medium" class="tarefas-date-clear" *ngIf="startDate || endDate" (click)="clearDateFilter()">
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+        <div class="tarefas-date-input">
+          <ion-icon name="calendar-number-outline"></ion-icon>
+          <ion-datetime-button datetime="relatorio-empresa-mes" class="tarefas-date-button"></ion-datetime-button>
+          <ion-button fill="clear" size="small" color="medium" class="tarefas-date-clear" *ngIf="selectedMonth" (click)="clearMonth()">
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+        <div class="tarefas-date-input">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-datetime-button datetime="relatorio-empresa-ano" class="tarefas-date-button"></ion-datetime-button>
+          <ion-button fill="clear" size="small" color="medium" class="tarefas-date-clear" *ngIf="selectedYear" (click)="clearYear()">
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="clientesFiltrados?.length; else vazio">
+      <div class="cards-grid">
+        <ion-card class="func-card" *ngFor="let c of clientesFiltrados; let i = index" (click)="navegarParaTarefas(c)" button>
+          <ion-item lines="none" class="func-header">
+            <ion-icon name="business-outline" slot="start" class="profile-avatar"></ion-icon>
+            <ion-label>
+              <h2 class="func-nome">{{ c?.nome || c?.razaoSocial || 'Empresa' }}</h2>
+              <p class="func-email">{{ c?.email || c?.telefone || '' }}</p>
+            </ion-label>
+          </ion-item>
+          <div class="content-grid">
+            <div class="chart-section">
+              <div class="chart-container">
+                <canvas #chartCanvas></canvas>
+                <div class="chart-center">
+                  <div class="total">{{ totalFor(displayedIndices[i]) }}</div>
+                  <div class="label">Total</div>
+                </div>
+              </div>
+            </div>
+            <div class="legend">
+              <div class="legend-chip" *ngFor="let label of chartLabels; let j=index">
+                <span class="dot" [ngStyle]="{ 'background-color': chartColors[j] }"></span>
+                <span class="legend-label">{{ label }}</span>
+                <span class="legend-value">{{ (chartData[displayedIndices[i]] || [0,0,0,0])[j] }}</span>
+              </div>
+            </div>
+          </div>
+        </ion-card>
+      </div>
+    </ng-container>
+
+    <ng-template #vazio>
+      <div class="empty">
+        Nenhuma empresa encontrada.
+      </div>
+    </ng-template>
+
+  <ion-popover trigger="relatorio-empresa-data-inicio" [showBackdrop]="false" [keepContentsMounted]="true" reference="trigger" side="bottom" alignment="start" cssClass="tarefa-date-popover">
+    <ng-template>
+      <ion-datetime id="relatorio-empresa-data-inicio" presentation="date" [value]="startDate || undefined" (ionChange)="onStartDateChange($event)" [isDateEnabled]="isStartDateEnabled"></ion-datetime>
+    </ng-template>
+  </ion-popover>
+
+  <ion-popover trigger="relatorio-empresa-data-fim" [showBackdrop]="false" [keepContentsMounted]="true" reference="trigger" side="bottom" alignment="start" cssClass="tarefa-date-popover">
+    <ng-template>
+      <ion-datetime id="relatorio-empresa-data-fim" presentation="date" [value]="endDate || undefined" (ionChange)="onEndDateChange($event)" [isDateEnabled]="isEndDateEnabled"></ion-datetime>
+    </ng-template>
+  </ion-popover>
+
+  <ion-popover trigger="relatorio-empresa-mes" [showBackdrop]="false" [keepContentsMounted]="true" reference="trigger" side="bottom" alignment="center" cssClass="tarefa-date-popover">
+    <ng-template>
+      <ion-datetime id="relatorio-empresa-mes" presentation="month-year" [value]="selectedMonth || undefined" (ionChange)="onMonthChange($event)"></ion-datetime>
+    </ng-template>
+  </ion-popover>
+
+  <ion-popover trigger="relatorio-empresa-ano" [showBackdrop]="false" [keepContentsMounted]="true" reference="trigger" side="bottom" alignment="center" cssClass="tarefa-date-popover">
+    <ng-template>
+      <ion-datetime id="relatorio-empresa-ano" presentation="year" [value]="selectedYear || undefined" (ionChange)="onYearChange($event)"></ion-datetime>
+    </ng-template>
+  </ion-popover>
+</ion-content>
+

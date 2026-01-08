@@ -1,0 +1,179 @@
+// Cabeçalho / logo
+.logo-title {
+	color: #2563eb;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin-left: 30px;
+}
+
+// Título da seção
+.section-title {
+	text-align: center;
+	width: 100%;
+	font-size: 1.5em;
+	font-weight: 600;
+	margin: 24px 0 32px 0;
+	color: #2563eb;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+// ====== VISUAL BASE (igual ao add-tarefa) ======
+.empresa-content {
+	--background: #1a1a1a;
+	--color: white;
+	--padding-top: 20px;
+	--padding-bottom: 20px;
+}
+
+.empresa-form {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 24px 40px 24px;
+}
+
+.form-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin-bottom: 32px;
+
+	@media (max-width: 768px) {
+		grid-template-columns: 1fr;
+		gap: 20px;
+	}
+}
+
+.form-field {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+
+	&.full-width {
+		grid-column: 1 / -1;
+	}
+}
+
+.field-label {
+	font-size: 15px;
+	font-weight: 600;
+	color: #e0e0e0;
+	margin-bottom: 4px;
+	display: block;
+}
+
+.custom-input {
+	--background: #2a2a2a;
+	--color: white;
+	--placeholder-color: #888;
+	--placeholder-opacity: 1;
+	--padding-start: 16px;
+	--padding-end: 16px;
+	--padding-top: 14px;
+	--padding-bottom: 14px;
+	border-radius: 10px;
+	font-size: 15px;
+	border: 1px solid #3a3a3a;
+
+	&:focus {
+		border-color: #4a90e2;
+	}
+}
+
+.custom-segment {
+	background: #2a2a2a;
+	border-radius: 12px;
+	padding: 6px;
+	display: flex;
+	gap: 8px;
+	border: 1px solid #3a3a3a;
+
+	ion-segment-button {
+		flex: 1 1 0;
+		border-radius: 10px;
+		font-weight: 700;
+		font-size: 14px;
+		color: rgba(255,255,255,0.85);
+		--background: transparent;
+		text-transform: uppercase;
+	}
+
+	ion-segment-button[aria-pressed="true"] {
+		background: linear-gradient(90deg, #2563eb, #6d28d9);
+		color: #fff !important;
+		box-shadow: 0 6px 18px rgba(37,99,235,0.16);
+	}
+}
+
+.input-with-action {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+
+	ion-input {
+		flex: 1 1 0;
+	}
+}
+
+.btn-lookup {
+	--background: #4a90e2;
+	--color: white;
+	font-weight: 600;
+	border-radius: 10px;
+	height: 48px;
+	padding: 0 14px;
+
+	&:disabled {
+		opacity: 0.6;
+	}
+}
+
+ion-note {
+	font-size: 12px;
+	margin-left: 4px;
+}
+
+// Ações do formulário
+.form-actions {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+	margin-top: 8px;
+}
+
+.btn-confirmar {
+	--background: #4a90e2;
+	--color: white;
+	font-weight: 600;
+	text-transform: capitalize;
+	height: 50px;
+	--border-radius: 25px;
+	font-size: 16px;
+
+	&:hover {
+		--background: #3a7bc8;
+	}
+
+	&:disabled {
+		opacity: 0.4;
+		--background: #555;
+	}
+}
+
+// Responsivo
+@media (max-width: 768px) {
+	.empresa-form {
+		padding: 0 16px 32px 16px;
+	}
+
+	.section-title {
+		font-size: 1.3em;
+		margin: 16px 0 24px 0;
+	}
+
+	.form-container {
+		gap: 18px;
+	}
+}
+
+

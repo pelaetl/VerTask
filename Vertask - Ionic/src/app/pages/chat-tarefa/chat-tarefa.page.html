@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar class="chat-toolbar">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="close()" aria-label="Fechar chat">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Chat da Tarefa</ion-title>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!canSend" class="chat-locked-toolbar">
+    <div class="chat-locked" aria-live="polite">A tarefa foi concluída — o chat está em modo somente-visualização.</div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chat-page" [fullscreen]="true">
+  <div class="messages" #messagesContainer>
+    <div *ngFor="let m of messages" class="message" [ngClass]="{mine: isMine(m)}">
+      <div class="avatar" [class.has-img]="!!avatarUrls[m.senderId || 0]">
+        <img *ngIf="avatarUrls[m.senderId || 0]" [src]="avatarUrls[m.senderId || 0]" alt="Foto do usuário" />
+        <span *ngIf="!avatarUrls[m.senderId || 0]">{{ getInitials(m.senderName) }}</span>
+      </div>
+      <div class="bubble">
+        <div class="meta">
+          <strong>{{ m.senderName }}</strong> · <small>{{ m.timestamp | date:'short' }}</small>
+          <span class="bubble-actions">
+            <ion-button fill="clear" size="small" class="bubble-action" (click)="selectReply(m)" aria-label="Responder mensagem">
+              <ion-icon slot="icon-only" name="return-up-back-outline"></ion-icon>
+            </ion-button>
+            <ion-button *ngIf="isMine(m)" fill="clear" size="small" class="bubble-action" color="danger" (click)="deleteMessage(m)" aria-label="Excluir mensagem">
+              <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+            </ion-button>
+          </span>
+        </div>
+        <div *ngIf="m.replyToContent" class="reply-chip">
+          <div class="reply-name">{{ m.replyToSenderName || 'Responder' }}</div>
+          <div class="reply-text">{{ m.replyToContent }}</div>
+        </div>
+        <div class="content">{{ m.content }}</div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="composer">
+    <div *ngIf="replyingTo" class="replying-bar">
+      <div class="replying-info">
+        <div class="replying-name">Respondendo {{ replyingTo.senderName }}</div>
+        <div class="replying-text">{{ replyingTo.content }}</div>
+      </div>
+      <ion-button fill="clear" size="small" (click)="cancelReply()" aria-label="Cancelar resposta">
+        <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="composer-row">
+      <ion-input [(ngModel)]="texto" placeholder="Escreva uma mensagem..." clearInput [disabled]="!canSend" (keydown.enter)="enviar()"></ion-input>
+      <ion-button fill="clear" class="send-button" (click)="enviar()" [disabled]="!canSend || !(texto && texto.trim())">
+        <ion-icon slot="icon-only" name="send"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

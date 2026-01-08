@@ -1,0 +1,99 @@
+/* Mudar Senha - estilo alinhado ao restante do app (tema escuro moderno) */
+
+:host {
+	display: block;
+	min-height: 100vh;
+	--background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+	background: var(--background);
+}
+
+.center-wrap {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	padding: 28px 16px;
+}
+
+.glass-card {
+	width: 100%;
+	max-width: 560px;
+	background: rgba(15, 23, 42, 0.8);
+	border-radius: 16px;
+	padding: 28px 24px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+	backdrop-filter: blur(16px);
+	text-align: center;
+}
+
+.glass-card h1 {
+	margin: 0 0 8px 0;
+	font-size: 24px;
+	color: #e5e7eb;
+	font-weight: 700;
+}
+
+.glass-card p.lead {
+	margin: 0 0 20px 0;
+	color: #9ca3af;
+	font-size: 14px;
+}
+
+.form-item {
+	--background: rgba(30, 41, 59, 0.55);
+	--border-radius: 14px;
+	--padding-start: 12px;
+	--padding-end: 8px;
+	--min-height: 52px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	margin-bottom: 12px;
+}
+
+.form-item ion-icon[slot="start"] {
+	color: #94a3b8;
+	font-size: 20px;
+}
+
+ion-input {
+	--color: #f3f4f6;
+	--placeholder-color: #94a3b8;
+	font-size: 0.95rem;
+}
+
+.toggle-btn {
+	--color: #9ca3af;
+}
+
+.primary-btn {
+	--background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+	--border-radius: 12px;
+	height: 46px;
+	font-weight: 700;
+}
+
+.primary-btn[disabled] {
+	opacity: 0.6;
+}
+
+.link-secondary {
+	margin-top: 12px;
+	display: block;
+	color: #93c5fd;
+	text-decoration: none;
+	font-size: 14px;
+}
+
+.link-secondary:hover { text-decoration: underline; }
+
+.error {
+	color: #f87171; /* danger-300 */
+	font-size: 13px;
+	margin-top: 6px;
+}
+
+@media (max-width: 480px) {
+	.glass-card { padding: 22px; border-radius: 14px; }
+	.glass-card h1 { font-size: 20px; }
+}
+

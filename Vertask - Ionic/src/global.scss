@@ -1,0 +1,101 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/**
+ * Ionic Dark Mode
+ * -----------------------------------------------------
+ * For more info, please see:
+ * https://ionicframework.com/docs/theming/dark-mode
+ */
+
+/* @import "@ionic/angular/css/palettes/dark.always.css"; */
+/* @import "@ionic/angular/css/palettes/dark.class.css"; */
+@import "@ionic/angular/css/palettes/dark.system.css";
+
+/* App toolbar and title styling for consistent appearance across pages */
+ion-toolbar.app-toolbar {
+  --min-height: 64px; /* ajuste se necessário */
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.title-search-row {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Garantir que nomes de perfil sejam exibidos com capitalização normal */
+.profile-name {
+  text-transform: none !important;
+  font-weight: normal;
+}
+
+.logo-title {
+  font-weight: 700;
+  font-size: clamp(20px, 4.5vw, 28px);
+  line-height: 1;
+  margin: 0;
+  color: var(--ion-color-primary-contrast, #000);
+  text-decoration: none;
+}
+
+/* Chat modal sizing and centering */
+.chat-modal .modal-wrapper {
+  width: 92%;
+  max-width: 900px;
+  height: 80vh;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--ion-color-base);
+}
+
+@media (max-width: 576px) {
+  .chat-modal .modal-wrapper {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+/* Keep date popovers anchored right below their trigger buttons app-wide */
+.tarefa-date-popover {
+  --offset-x: 0;
+  --offset-y: 8px;
+}
+
+.tarefa-date-popover::part(content) {
+  transform: none;
+  min-width: 260px;
+  border-radius: 16px;
+}

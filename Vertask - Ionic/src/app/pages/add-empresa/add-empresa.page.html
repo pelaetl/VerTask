@@ -1,0 +1,75 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">VerTask</ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="empresa-content" [fullscreen]="true" id="main-content">
+  <h2 class="section-title">CADASTRAR CLIENTE</h2>
+
+  <form [formGroup]="form" (ngSubmit)="salvar()" class="empresa-form">
+    <div class="form-container">
+      <div class="form-field full-width">
+        <label class="field-label">Tipo do Cliente</label>
+        <ion-segment formControlName="tipo" aria-label="Tipo do cliente" class="custom-segment">
+          <ion-segment-button value="empresa">Empresa</ion-segment-button>
+          <ion-segment-button value="pessoa">Pessoa</ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <div class="form-field full-width">
+        <label class="field-label">Nome</label>
+        <ion-input formControlName="nome" class="custom-input" placeholder="Insira o nome"></ion-input>
+      </div>
+
+      <div class="form-field full-width" *ngIf="form.get('tipo')?.value === 'empresa'">
+        <label class="field-label">CNPJ</label>
+        <div class="input-with-action">
+          <ion-input formControlName="cnpj" placeholder="00.000.000/0000-00" (ionInput)="onCnpjInput($event)" class="custom-input"></ion-input>
+          <ion-button size="default" fill="solid" (click)="buscarCnpj()" [disabled]="loadingLookup" class="btn-lookup">
+            {{ loadingLookup ? '...' : 'Buscar' }}
+          </ion-button>
+        </div>
+        <ion-note color="danger" *ngIf="form.get('cnpj')?.touched && form.get('cnpj')?.hasError('invalidCnpj')">CNPJ inválido</ion-note>
+      </div>
+
+      <div class="form-field full-width" *ngIf="form.get('tipo')?.value === 'pessoa'">
+        <label class="field-label">CPF</label>
+        <ion-input formControlName="cpf" placeholder="000.000.000-00" (ionInput)="onCpfInput($event)" class="custom-input"></ion-input>
+        <ion-note color="danger" *ngIf="form.get('cpf')?.touched && form.get('cpf')?.hasError('invalidCpf')">CPF inválido</ion-note>
+      </div>
+
+      <div class="form-field" *ngIf="form.get('tipo')?.value === 'empresa'">
+        <label class="field-label">Nome Fantasia</label>
+        <ion-input formControlName="fantasia" class="custom-input" placeholder="Insira o nome fantasia"></ion-input>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Endereço</label>
+        <ion-input formControlName="endereco" class="custom-input" placeholder="Rua, número, bairro"></ion-input>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Telefone</label>
+        <ion-input formControlName="telefone" class="custom-input" placeholder="(DDD) 99999-9999" (ionInput)="onTelefoneInput($event)"></ion-input>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">E-mail</label>
+        <ion-input formControlName="email" type="email" class="custom-input" placeholder="contato@empresa.com"></ion-input>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Honorário</label>
+        <ion-input formControlName="honorario" type="number" class="custom-input" placeholder="0,00"></ion-input>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <ion-button type="submit" expand="block" color="primary" [disabled]="form.invalid" class="btn-confirmar">Salvar</ion-button>
+      <ion-button type="button" expand="block" color="danger" (click)="limpar()" class="btn-limpar">Limpar</ion-button>
+    </div>
+  </form>
+</ion-content>

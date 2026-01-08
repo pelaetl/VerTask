@@ -1,0 +1,72 @@
+﻿.logo-title {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 30px;
+}
+// Título da seção
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 16px 0 16px;
+}
+
+// Container principal do conteúdo
+.content-container {
+  padding: 0 4px 80px 4px;
+  width: 100%;
+}
+
+.card-list {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.card-item {
+  --background: #ffffff;
+  background: #ffffff;
+  --inner-padding-start: 16px;
+  --inner-padding-end: 12px;
+  --inner-padding-top: 12px;
+  --inner-padding-bottom: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+.card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+}
+
+.card-text h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.card-actions {
+  display: inline-flex;
+  gap: 6px;
+}
+
+// Botão flutuante
+.fab-button {
+  --background: #2563eb;
+  --color: white;
+  --box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+  
+  ion-icon {
+    font-size: 24px;
+  }
+}

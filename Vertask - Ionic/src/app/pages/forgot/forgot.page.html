@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true" class="forgot-bg">
+  <div class="forgot-container">
+    <div class="forgot-card">
+      <h1 class="forgot-title">Esqueceu sua senha?</h1>
+      <p class="forgot-subtitle">Insira seu e-mail e nós enviaremos um código de verificação.</p>
+
+      <form [formGroup]="formGroup" (ngSubmit)="enviarLink()">
+        <ion-item>
+          <ion-label position="stacked">E-mail</ion-label>
+          <ion-input type="email" formControlName="email" inputmode="email" required></ion-input>
+        </ion-item>
+        <ion-note
+          color="danger"
+          *ngIf="formGroup.get('email')?.touched && formGroup.get('email')?.hasError('email')"
+        >
+          Informe um email válido (exemplo&#64;dominio.com).
+        </ion-note>
+
+        <ion-button type="submit" expand="block" color="primary"  [disabled]="!formGroup.valid">Enviar</ion-button>
+      </form>
+
+      <div class="forgot-links">
+        <a routerLink="/login">ou faça login</a>
+      </div>
+    </div>
+  </div>
+</ion-content>

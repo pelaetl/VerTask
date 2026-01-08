@@ -1,0 +1,167 @@
+<ion-menu side="start" menuId="main-menu" contentId="main-content" class="side-menu">
+  <ion-header>
+    <ion-toolbar class="menu-toolbar">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list class="menu-list">
+      <ion-item routerLink="/minhas-tarefas" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="checkbox-outline"></ion-icon>
+        <ion-label>Minhas Tarefas</ion-label>
+      </ion-item>
+      <ion-item routerLink="/calendario-tarefas" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-label>Calendário</ion-label>
+      </ion-item>
+    </ion-list>
+
+  </ion-content>
+</ion-menu>
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="title-search-row">
+        <span class="logo-title">VerTask</span>
+        <!-- <ion-searchbar placeholder="Buscar tarefas" class="searchbar"></ion-searchbar> -->
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="abrirPerfil($event)">
+        <ion-avatar *ngIf="avatarUrl; else defaultIcon" class="profile-avatar">
+          <img [src]="avatarUrl" alt="Foto do usuário" />
+        </ion-avatar>
+        <ng-template #defaultIcon>
+          <ion-icon name="person-circle-outline" class="profile-icon"></ion-icon>
+        </ng-template>
+        <span class="profile-name">{{ funcionario.nome }}</span>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-popover [isOpen]="popoverAberto" [event]="popoverEvento" (didDismiss)="popoverAberto = false">
+      <ng-template>
+        <ion-list>
+          <ion-item button (click)="editarPerfil()">Editar Perfil
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+          </ion-item>
+          <ion-item button (click)="sair()">
+            Sair
+            <ion-icon slot="start" name="exit-outline"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="inicio-admin-content" id="main-content">
+  <div class="inicio-admin-grid">
+    <div class="inicio-admin-col-esquerda">
+      <h2 class="section-title">Prioridades</h2>
+      <div class="prioridades-container">
+        <ion-list class="prioridades-list" *ngIf="tarefasFavoritas.length > 0; else semPrioridades">
+          <ion-item
+            *ngFor="let tarefa of tarefasFavoritas"
+            class="prioridade-item"
+            lines="none"
+            button
+            detail="false"
+            [routerLink]="['/detalhes-tarefa', tarefa.idTarefa]">
+            <div class="prioridade-indicador" [ngClass]="prioridadeIndicadorClass(tarefa)"></div>
+            <ion-label>
+              <div class="prioridade-header">
+                <h3>{{ tarefa.nome }}</h3>
+                <ion-badge [color]="statusBadgeColor(tarefa.statusTarefa)">
+                  {{ tarefa.statusTarefa | titlecase }}
+                </ion-badge>
+              </div>
+              <div class="prioridade-footer">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <span>{{ tarefa.dataEntrega | date:'dd/MM/yyyy' }}</span>
+                <span class="prioridade-prazo">{{ prazoLabel(tarefa) }}</span>
+              </div>
+            </ion-label>
+            <ion-icon slot="end" name="chevron-forward-outline" class="prioridade-chevron"></ion-icon>
+          </ion-item>
+        </ion-list>
+        <ng-template #semPrioridades>
+          <div class="prioridades-empty">
+            <ion-icon name="flag-outline"></ion-icon>
+            <p>Nenhuma tarefa marcada como prioridade.</p>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- <h2 class="section-title">Calendário de Tarefas</h2>
+      <div class="calendario-row">
+        <div class="calendario-content calendario-metade-esquerda">
+          <ion-datetime presentation="date" [value]="selectedDate" (ionChange)="onDateChange($event)"
+            class="calendario-datetime"></ion-datetime>
+        </div>
+
+        <div class="calendario-content calendario-metade-direita">
+          <div class="calendario-data-header">
+            <ion-icon name="calendar-number-outline"></ion-icon>
+            <span>{{ selectedDate | date:'dd/MM/yyyy'}}</span>
+          </div>
+
+          <div class="calendario-tarefas">
+            <div *ngIf="tarefasFiltradas.length === 0" class="no-tasks-message">
+              <ion-icon name="sparkles-outline"></ion-icon>
+              <p>Sem tarefas para a data selecionada.</p>
+            </div>
+
+            <div
+              *ngFor="let tarefa of tarefasFiltradas"
+              class="calendario-tarefa-card"
+              [routerLink]="['/detalhes-tarefa', tarefa.idTarefa]"
+            >
+              <div class="calendario-tarefa-header">
+                <h4>{{ tarefa.nome }}</h4>
+                <ion-badge [color]="statusBadgeColor(tarefa.statusTarefa)">
+                  {{ tarefa.statusTarefa | titlecase }}
+                </ion-badge>
+              </div>
+              <p class="calendario-tarefa-descricao">
+                {{ tarefa.descricao || 'Sem descrição informada.' }}
+              </p>
+              <div class="calendario-tarefa-footer">
+                <div>
+                  <ion-icon name="calendar-outline"></ion-icon>
+                  <span>{{ tarefa.dataEntrega | date:'dd/MM/yyyy' }}</span>
+                </div>
+                <span class="calendario-tarefa-prazo">{{ prazoLabel(tarefa) }}</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+    </div>
+    <div class="inicio-admin-col-direita">
+
+        <h2 class="section-title">Minhas Tarefas</h2>
+      <div class="resumo-row">
+        <ion-card class="funcionario-card">
+          <ion-card-content>
+            <div class="chart-wrapper" style="height:240px; padding:12px;">
+              <canvas #doughnutCanvas></canvas>
+            </div>
+            <div class="chart-summary">
+              <div class="chart-chips">
+                <span class="chart-chip chip-pendente">Pendente: {{ statusCounts.pend }}</span>
+                <span class="chart-chip chip-andamento">Em Andamento: {{ statusCounts.and }}</span>
+                <span class="chart-chip chip-concluida">Concluída: {{ statusCounts.concl }}</span>
+                <span class="chart-chip chip-atrasada">Atrasada: {{ statusCounts.atra }}</span>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,119 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <div class="title-search-row">
+      <ion-router-link [routerLink]="inicioRoute" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="calendar-page ion-padding" id="main-content">
+  <div class="tarefas-header">
+    <h2 class="section-title">Calendário de Tarefas</h2>
+  </div>
+
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <div class="header-left">
+        <ion-button fill="clear" size="small" (click)="goToToday()">
+          Hoje
+        </ion-button>
+        <ion-chip color="medium" outline>
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          <ion-label>Mês</ion-label>
+        </ion-chip>
+      </div>
+
+      <div class="header-center">
+        <ion-button fill="clear" size="small" (click)="previousMonth()">
+          <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+        </ion-button>
+        <span class="month-label">{{ mesExibido }}</span>
+        <ion-button fill="clear" size="small" (click)="nextMonth()">
+          <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+
+    <div class="calendar-grid">
+      <div class="weekdays">
+        <span class="weekday" *ngFor="let name of dayNames">{{ name }}</span>
+      </div>
+
+      <div class="weeks">
+        <div class="week" *ngFor="let week of weeks">
+          <button
+            type="button"
+            class="day"
+            *ngFor="let day of week"
+            [class.outside]="!day.inCurrentMonth"
+            [class.today]="day.isToday"
+            [class.selected]="day.iso === selectedDayIso"
+            [class.blocked]="isDateBlocked(day.date)"
+            [disabled]="isDateBlocked(day.date)"
+            (click)="selecionarDia(day)"
+          >
+            <span class="day-number">{{ day.label }}</span>
+            <span class="task-dot" *ngIf="day.taskCount > 0">{{ day.taskCount }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="state-banner erro" *ngIf="erroCarregamento">{{ erroCarregamento }}</div>
+  <div class="state-banner loading" *ngIf="isLoading">
+    <ion-spinner name="crescent"></ion-spinner>
+    Carregando tarefas…
+  </div>
+
+  <div class="tasks-panel">
+    <div class="tasks-header">
+      <h2>{{ diaSelecionadoLabel || 'Selecione um dia' }}</h2>
+      <div class="tasks-counter" *ngIf="tarefasSelecionadas.length">
+        <ion-icon name="clipboard-outline"></ion-icon>
+        <span>{{ tarefasSelecionadas.length }}</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="tarefasSelecionadas.length; else vazio">
+      <div class="tasks-list">
+        <div class="tarefa-item" *ngFor="let tarefa of tarefasSelecionadas">
+          <div class="tarefa-indicador" [ngClass]="tarefaIndicadorClass(tarefa)"></div>
+          <div class="tarefa-conteudo">
+            <div class="tarefa-header">
+              <h3>{{ tarefa.nome }}</h3>
+              <ion-badge [color]="statusBadgeColor(tarefa.statusTarefa)">{{ formatarStatus(tarefa.statusTarefa) }}</ion-badge>
+            </div>
+
+            <p class="tarefa-descricao" [title]="tarefa.descricao">{{ tarefa.descricao }}</p>
+
+            <div class="tarefa-footer">
+              <div class="tarefa-info">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <span>{{ tarefa.dataEntrega | date:'dd/MM/yyyy' }}</span>
+              </div>
+              <div class="tarefa-info" *ngIf="tarefa.dataEntrega as d">
+                <ion-icon name="time-outline"></ion-icon>
+                <span>{{ d | date:'shortTime' }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #vazio>
+      <div class="empty-card">
+        <ion-icon name="sparkles-outline"></ion-icon>
+        <div>
+          <div class="empty-title">Nenhuma tarefa neste dia</div>
+          <div class="empty-sub">Aproveite para adiantar suas atividades ✨</div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</ion-content>

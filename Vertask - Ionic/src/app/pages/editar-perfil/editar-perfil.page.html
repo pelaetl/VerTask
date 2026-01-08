@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Editar Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="cancelar()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <!-- Avatar -->
+  <div class="avatar-container">
+    <div class="avatar-circle" (click)="selecionarFoto()">
+      <ng-container *ngIf="fotoPreview; else defaultAvatar">
+        <img [src]="fotoPreview" alt="Foto do usuário" class="avatar-image" />
+      </ng-container>
+      <ng-template #defaultAvatar>
+        <ion-icon name="person-circle" class="profile-icon"></ion-icon>
+      </ng-template>
+      <!-- <ion-icon name="camera" class="camera-icon"></ion-icon> -->
+    </div>
+    <input #fileInput type="file" accept="image/*" hidden (change)="onFileSelected($event)" />
+  </div>
+
+  <!-- Campos do formulário -->
+
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+
+    <ion-item>
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input type="text" formControlName="nome"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-textarea type="text" formControlName="email"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Senha (deixe em branco para manter a atual)</ion-label>
+      <ion-input formControlName="senha" type="password" placeholder="Digite nova senha"></ion-input>
+    </ion-item>
+
+
+    <div class="button-container">
+      <ion-button fill="clear" color="medium" (click)="cancelar()">
+        Cancelar
+      </ion-button>
+      <ion-button (click)="salvar()" [disabled]="!formGroup.valid">
+        Salvar
+      </ion-button>
+    </div>
+  </form>
+
+  <!-- Botões -->
+</ion-content>

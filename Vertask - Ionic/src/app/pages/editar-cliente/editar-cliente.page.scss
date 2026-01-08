@@ -1,0 +1,147 @@
+/* Usa estilos globais para toolbar via global.scss */
+
+.title-search-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-title {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.2em;
+  text-decoration: none;
+  margin-left: 30px;
+}
+
+.section-title {
+  text-align: center;
+  width: 100%;
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 24px 0 32px 0;
+  color: #2563eb;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+// ========== TAREFA FORM STYLES ==========
+.tarefa-content {
+  --background: #1a1a1a;
+  --color: white;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+.tarefa-form {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &.full-width {
+    grid-column: 1 / -1;
+  }
+}
+
+.field-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #e0e0e0;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.custom-input,
+.custom-textarea,
+.custom-select {
+  --background: #2a2a2a;
+  --color: white;
+  --placeholder-color: #888;
+  --placeholder-opacity: 1;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  border: 1px solid #3a3a3a;
+  
+  &:focus {
+    border-color: #4a90e2;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.spinner-center {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+// ========== FORM ACTIONS ==========
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.btn-limpar,
+.btn-confirmar {
+  --background: #c42424;
+  --color: white;
+  font-weight: 600;
+  text-transform: capitalize;
+  height: 50px;
+  border-radius: 10px;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.btn-confirmar {
+  --background: #2563eb;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.btn-limpar {
+  &:hover:not(:disabled) {
+    --background: #b91c1c;
+  }
+}
+
+.btn-confirmar {
+  &:hover:not(:disabled) {
+    --background: #1d4ed8;
+  }
+}
+

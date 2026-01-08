@@ -1,0 +1,45 @@
+use vertask;
+
+CREATE TABLE setor (
+id_setor int PRIMARY KEY NOT NULL auto_increment,
+nome varchar(20) NOT NULL,
+descricao varchar(200) NOT NULL
+);
+
+CREATE TABLE funcionario (
+id_funcionario int PRIMARY KEY NOT NULL auto_increment,
+nome varchar(20) NOT NULL,
+email varchar(30),
+senha varchar(10) NOT NULL,
+id_setor int,
+foreign key (id_setor) references setor(id_setor)
+);
+
+-- Migration added 2025-10-27: adiciona campos de documento em tarefa
+ALTER TABLE tarefa
+	ADD COLUMN documento_nome VARCHAR(255),
+	ADD COLUMN documento_mime VARCHAR(100),
+	ADD COLUMN documento_tamanho BIGINT,
+	ADD COLUMN documento_path VARCHAR(500);
+
+-- Tabela para armazenar mensagens do chat por tarefa
+CREATE TABLE IF NOT EXISTS mensagem (
+	id_mensagem BIGINT PRIMARY KEY AUTO_INCREMENT,
+	id_tarefa BIGINT NOT NULL,
+	id_remetente BIGINT NULL,
+	nome_remetente VARCHAR(255) NULL,
+	conteudo TEXT NOT NULL,
+	data_envio DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	FOREIGN KEY (id_tarefa) REFERENCES tarefa(id_tarefa)
+);
+
+-- Migration added 2025-12-02: adicionar coluna observacao à tabela tarefa
+ALTER TABLE tarefa
+    ADD COLUMN observacao TEXT;
+
+-- Migration added 2026-01-04: adicionar novo status CONCLUIDA_ATRASADA
+-- Este status é usado quando uma tarefa é concluída após o prazo de entrega
+-- A coluna status_tarefa deve aceitar os valores: PENDENTE, EM_ANDAMENTO, CONCLUIDA, CONCLUIDA_ATRASADA, ATRASADO
+-- Se estiver usando ENUM, execute:
+-- ALTER TABLE tarefa MODIFY COLUMN status_tarefa ENUM('PENDENTE', 'EM_ANDAMENTO', 'CONCLUIDA', 'CONCLUIDA_ATRASADA', 'ATRASADO');
+-- Se estiver usando VARCHAR, não é necessário fazer alterações pois aceita qualquer string

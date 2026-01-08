@@ -1,0 +1,57 @@
+<!-- <ion-menu side="start" menuId="main-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/inicio-administrador">Início</ion-item>
+      <ion-item routerLink="/minhas-tarefas">Todas Tarefas</ion-item>
+      <ion-item routerLink="/minhas-tarefas">Minhas Tarefas</ion-item>
+      <ion-item routerLink="/cadastro-funcionario">Funcionários</ion-item>
+      <ion-item routerLink="/setores">Setores</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu> -->
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" id="main-content">
+  <div class="content-container">
+    <h2 class="section-title">Setores</h2>
+
+    <ion-list class="card-list">
+      <ion-item class="card-item" *ngFor="let setor of setores" detail="false" lines="none">
+        <ion-label class="card-text">
+          <h3>{{ setor.nome }}</h3>
+        </ion-label>
+        <div class="card-actions" slot="end">
+          <ion-button fill="clear" size="small" color="primary" (click)="editarSetor(setor); $event.stopPropagation()">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="small" color="danger" (click)="excluir(setor); $event.stopPropagation()">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Botão flutuante -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="novoSetor()" class="fab-button">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

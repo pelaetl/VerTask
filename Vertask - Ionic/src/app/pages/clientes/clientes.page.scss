@@ -1,0 +1,125 @@
+.app-toolbar {
+  --background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  --color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.clientes-header {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ion-text-color, #000);
+}
+
+.clientes-list {
+  --ion-background-color: transparent;
+}
+
+.cliente-item {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --inner-border-width: 0;
+  --background: transparent;
+  margin-bottom: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  background: var(--ion-background-color, #fff);
+}
+
+.cliente-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+
+  h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ion-text-color, #000);
+    flex: 1;
+  }
+}
+
+.cliente-tipo {
+  padding: 4px 8px;
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cliente-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--ion-color-medium, #666);
+  margin-bottom: 4px;
+
+  ion-icon {
+    font-size: 1rem;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.cliente-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.clientes-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  text-align: center;
+
+  ion-icon {
+    font-size: 64px;
+    color: var(--ion-color-medium, #ccc);
+    margin-bottom: 16px;
+  }
+
+  p {
+    color: var(--ion-color-medium, #666);
+    font-size: 1rem;
+    margin: 0 0 24px 0;
+  }
+}
+
+.spinner-center {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cliente-item {
+    background: #1a1a1a;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .cliente-tipo {
+    background: rgba(37, 99, 235, 0.2);
+    color: #60a5fa;
+  }
+}

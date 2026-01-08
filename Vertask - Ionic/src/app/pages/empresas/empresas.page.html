@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">VerTask</ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding" id="main-content">
+  <div class="content-container">
+    <div class="tarefas-header">
+      <h2 class="section-title">Clientes</h2>
+      <div class="tarefas-filtros">
+        <ion-searchbar
+          placeholder="Buscar clientes"
+          [value]="searchTerm"
+          (ionInput)="onSearchChange($event)"
+          show-clear-button="focus"
+          class="tarefas-searchbar"
+        ></ion-searchbar>
+      </div>
+    </div>
+
+    <!-- lista de clientes (mesmo formato dos cartões de Setores) -->
+    <ion-list class="card-list">
+      <ion-item *ngFor="let c of clientesFiltrados" class="card-item" detail="false" lines="none">
+        <ion-icon name="business-outline" slot="start" class="card-icon"></ion-icon>
+        <ion-label class="card-text">
+          <h3>{{ c.nome }}</h3>
+          <p *ngIf="c.nomeFantasia">{{ c.nomeFantasia }}</p>
+          <small class="card-subtitle">{{ c.tipo === 'empresa' ? 'CNPJ' : 'CPF' }}: {{ c.tipo === 'empresa' ? (c.cnpj || '-') : (c.cpf || '-') }}</small>
+        </ion-label>
+        <div class="card-actions" slot="end">
+          <ion-button fill="clear" size="small" color="primary" (click)="editarCliente(c, $event)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="small" color="danger" (click)="excluir(c, $event)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+      <div *ngIf="clientesFiltrados.length === 0" class="no-results">Nenhum cliente encontrado.</div>
+    </ion-list>
+  </div>
+
+  <!-- Botão flutuante (leva para add-empresa) -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/add-empresa" class="fab-button">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

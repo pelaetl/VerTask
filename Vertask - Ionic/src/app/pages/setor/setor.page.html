@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/setores"></ion-back-button>
+    </ion-buttons>
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" class="ion-padding" id="main-content">
+  <h2 class="section-title">Setor</h2>
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+    <ion-item>
+      <ion-label position="stacked">Nome do Setor</ion-label>
+      <ion-input type="text" formControlName="nomeSetor"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Descrição do Setor</ion-label>
+      <ion-textarea type="text" formControlName="descricaoSetor"></ion-textarea>
+    </ion-item>
+
+
+    <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">Salvar</ion-button>
+  </form>
+</ion-content>

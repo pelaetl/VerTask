@@ -1,0 +1,98 @@
+<ion-content [fullscreen]="true" class="login-bg">
+  <div class="login-container">
+    <div class="login-card">
+      <h1 class="login-title">VerTask</h1>
+      <p class="login-subtitle">Sistema Gerenciador de Tarefas</p>
+      <form [formGroup]="formGroup" (ngSubmit)="autenticar()">
+        <ion-item>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" inputmode="email" formControlName="login" required></ion-input>
+        </ion-item>
+        <ion-note
+          color="danger"
+          *ngIf="formGroup.get('login')?.touched && formGroup.get('login')?.hasError('email')"
+        >
+          Informe um email válido (exemplo&#64;dominio.com).
+        </ion-note>
+        <ion-item>
+          <ion-label position="stacked">Senha</ion-label>
+          <ion-input type="password" formControlName="senha" required></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">
+          Entrar
+          <ion-icon slot="end" name="log-in-outline"></ion-icon>
+        </ion-button>
+      </form>
+      <!-- <div class="login-links">
+        <a routerLink="/forgot">Esqueci a senha</a><br>
+        <p>Não tem uma conta?</p>
+        <a routerLink="/cadastro-funcionario">Criar conta como Funcionário</a><br>
+        <a routerLink="/cadastro-administrador">Criar conta como Administrador</a>
+      </div> -->
+
+
+      <!-- <div class="login-links">
+        <a routerLink="/forgot">Esqueci a senha</a><br>
+        <p>Não tem uma conta?</p>
+        <div class="login-signup-buttons">
+          <ion-button routerLink="/cadastro-funcionario" expand="block" fill="outline" color="primary">
+            <ion-icon slot="start" name="people-outline"></ion-icon>
+            Criar conta como Funcionário
+          </ion-button>
+          <ion-button routerLink="/cadastro-administrador" expand="block" color="secondary">
+            <ion-icon slot="start" name="shield-checkmark-outline"></ion-icon>
+            Criar conta como Administrador
+          </ion-button>
+        </div>
+      </div> -->
+
+
+
+      <div class="login-links">
+        <a routerLink="/forgot">Esqueci a senha</a><br>
+        <p>Não tem uma conta? Crie</p>
+        <ion-grid class="login-signup-buttons">
+          <ion-row>
+            <ion-col size="6">
+              <ion-button routerLink="/cadastro-funcionario" expand="block" fill="outline" color="primary">
+                <ion-icon slot="start" name="people-outline"></ion-icon>
+                Funcionário
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button routerLink="/cadastro-administrador" expand="block" color="secondary">
+                <ion-icon slot="start" name="shield-checkmark-outline"></ion-icon>
+                Administrador
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+
+      <!-- <div class="login-links">
+        <a routerLink="/forgot">Esqueci a senha</a><br>
+        <p>Não tem uma conta?</p>
+        <ion-grid class="login-signup-buttons">
+          <ion-row>
+            <ion-col size="6">
+              <ion-button routerLink="/cadastro-funcionario" expand="block" fill="outline" color="primary">
+                <ion-icon slot="start" name="people-outline"></ion-icon>
+                Funcionário
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button routerLink="/cadastro-administrador" expand="block" color="secondary">
+                <ion-icon slot="start" name="shield-checkmark-outline"></ion-icon>
+                Administrador
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div> -->
+
+
+
+    </div>
+  </div>
+</ion-content>

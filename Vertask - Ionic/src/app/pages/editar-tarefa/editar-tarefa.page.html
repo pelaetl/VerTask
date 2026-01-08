@@ -1,0 +1,99 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/todas-tarefas"></ion-back-button>
+    </ion-buttons>
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" class="tarefa-content" id="main-content">
+  <h2 class="section-title">EDITAR TAREFA</h2>
+
+  <div *ngIf="formGroup.disabled" class="not-editable-note">
+    <ion-badge color="success">Concluída</ion-badge>
+    <span>Tarefa concluída — não pode ser editada.</span>
+  </div>
+
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()" class="tarefa-form">
+    <div class="form-container">
+      <div class="form-field full-width">
+        <label class="field-label">Título</label>
+        <ion-input type="text" formControlName="nome" placeholder="Insira um título" class="custom-input"></ion-input>
+      </div>
+
+      <div class="form-field full-width">
+        <label class="field-label">Descrição</label>
+        <ion-textarea formControlName="descricao" placeholder="Insira uma descrição" class="custom-textarea" rows="5"></ion-textarea>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Data de Entrega</label>
+        <ion-datetime
+          display-format="DD/MM/YYYY"
+          picker-format="DD/MM/YYYY HH:mm"
+          formControlName="dataEntrega"
+          class="custom-input"
+          [min]="getMinDate()"
+        ></ion-datetime>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Responsáveis</label>
+        <ion-select formControlName="usuarios" multiple="true" (ionChange)="onUsuariosChange()" placeholder="Selecione os responsáveis" interface="popover" class="custom-select" [compareWith]="compareUsuarios">
+          <ion-select-option *ngFor="let u of todosUsuarios" [value]="u">{{ u.nome }}</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="form-field full-width">
+        <label class="field-label">Cliente</label>
+        <ion-select
+          formControlName="clienteId"
+          placeholder="Selecione o cliente"
+          interface="popover"
+          class="custom-select"
+          (ionChange)="onClienteChange($event)">
+          <ion-select-option *ngFor="let c of clientes" [value]="c.id">{{ formatarNomeCliente(c) }}</ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="form-field full-width">
+        <label class="field-label">Arquivos</label>
+        <div class="file-upload-wrapper">
+          <input type="file" id="fileEditInput" (change)="onFileSelected($event)" class="file-input" />
+          <label for="fileEditInput" class="file-label">Escolher arquivo</label>
+        </div>
+
+        <div class="file-selected" *ngIf="tarefa?.documentoNome">
+          <ion-icon name="document-outline"></ion-icon>
+          <span>Arquivo atual: {{ tarefa.documentoNome }}</span>
+          <ion-button size="small" fill="clear" color="primary" (click)="baixarDocumento()">Baixar</ion-button>
+        </div>
+
+        <div class="file-selected" *ngIf="selectedFile">
+          <ion-icon name="document-outline"></ion-icon>
+          <span>Arquivo selecionado: {{ selectedFile.name }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <ion-button type="button" expand="block" color="danger" routerLink="/todas-tarefas" class="btn-limpar">
+        Cancelar
+      </ion-button>
+
+      <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid || formGroup.disabled" class="btn-confirmar">
+        Salvar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

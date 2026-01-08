@@ -1,0 +1,81 @@
+/* Estilos baseados no login.page.scss adaptados para a página Esqueci a senha */
+.forgot-bg {
+	--background: linear-gradient(135deg, #2980f2 0%, #4f8cff 100%);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.forgot-container {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.forgot-card {
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+	padding: 36px 32px;
+	min-width: 420px;
+	max-width: 92vw;
+	text-align: center;
+}
+
+.forgot-title {
+	font-size: 2.2rem;
+	font-weight: 700;
+	margin-bottom: 0.25em;
+	color: #111;
+}
+
+.forgot-subtitle {
+	color: #6c757d;
+	margin-bottom: 1.25em;
+	font-size: 1rem;
+}
+
+ion-item {
+	--background: transparent;
+	margin-bottom: 12px;
+	--min-height: 56px;
+	--padding-start: 0;
+	--padding-end: 0;
+}
+
+ion-input {
+	font-size: 1.05rem;
+	min-height: 44px;
+	--padding-start: 12px;
+	--padding-end: 12px;
+	color: #111;
+}
+
+ion-button {
+	margin-top: 18px;
+	margin-bottom: 8px;
+	--border-radius: 10px;
+	background: linear-gradient(90deg,#6b3df8 0%,#8c3bff 100%);
+	color: #fff;
+}
+
+.forgot-links {
+	text-align: center;
+	margin-top: 12px;
+	font-size: 0.95rem;
+}
+
+.forgot-links a {
+	color: #6b3df8;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+
+.forgot-card { z-index: 2; }
+

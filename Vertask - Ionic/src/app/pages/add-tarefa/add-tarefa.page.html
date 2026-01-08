@@ -1,0 +1,107 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+
+    <!-- <ion-popover [isOpen]="popoverAberto" [event]="popoverEvento" (didDismiss)="popoverAberto = false">
+      <ng-template>
+        <ion-list>
+          <ion-item button (click)="editarPerfil()">Editar Perfil
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+          </ion-item>
+          <ion-item button (click)="sair()">
+            Sair
+            <ion-icon slot="start" name="exit-outline"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content class="tarefa-content">
+
+  <h2 class="section-title">CADASTRAR TAREFA</h2>
+  
+  <form [formGroup]="formGroup" (ngSubmit)="salvar()" class="tarefa-form">
+    
+    <div class="form-container">
+      <!-- Linha 1: Título -->
+      <div class="form-field full-width">
+        <label class="field-label">Título</label>
+        <ion-input type="text" formControlName="nome" placeholder="Insira um título" class="custom-input"></ion-input>
+      </div>
+
+      <!-- Linha 2: Descrição -->
+      <div class="form-field full-width">
+        <label class="field-label">Descrição</label>
+        <ion-textarea formControlName="descricao" placeholder="Insira uma descrição" class="custom-textarea" rows="5"></ion-textarea>
+      </div>
+
+      <!-- Linha 3: Data de Entrega e Funcionários -->
+      <div class="form-field">
+        <label class="field-label">Data de Entrega</label>
+        <ion-datetime [(ngModel)]="dataEntregaInput" formControlName="dataEntrega"
+          (ionChange)="onDataEntregaChange($event)" displayFormat="DD/MM/YYYY" 
+          placeholder="  /    /" [min]="getMinDate()" [isDateEnabled]="isDateEnabled" required class="custom-input">
+        </ion-datetime>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Funcionário(s)</label>
+        <ion-select [(ngModel)]="usuariosSelecionados" formControlName="usuarios" multiple="true"
+          placeholder="Selecione" (selectionChange)="onUsuariosChange()" interface="popover" class="custom-select">
+          <ion-select-option *ngFor="let usuario of todosUsuarios" [value]="usuario">
+            {{ usuario.nome }}
+          </ion-select-option>
+        </ion-select>
+      </div>
+
+      <!-- Linha 4: Cliente e Anexar Arquivo -->
+      <div class="form-field">
+        <label class="field-label">Cliente</label>
+        <ion-select [(ngModel)]="tarefa.clienteId" formControlName="clienteId" placeholder="Selecione o cliente"
+          (selectionChange)="onClienteChange($event)" interface="popover" class="custom-select">
+          <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
+            {{ cliente.nome || cliente.razaoSocial }}
+          </ion-select-option>
+        </ion-select>
+      </div>
+
+      <div class="form-field">
+        <label class="field-label">Anexar Arquivo</label>
+        <div class="file-upload-wrapper">
+          <input type="file" id="fileInput" accept="application/pdf" (change)="onFileSelected($event)" class="file-input" />
+          <label for="fileInput" class="file-label">Escolher arquivo</label>
+        </div>
+        <div class="file-selected" *ngIf="selectedFileName">
+          <ion-icon name="document-outline"></ion-icon>
+          <span>{{ selectedFileName }}</span>
+          <ion-icon name="close-circle" class="remove-file" (click)="removerArquivo()" title="Remover arquivo"></ion-icon>
+        </div>
+      </div>
+
+      <!-- Linha 5: Notificações -->
+      <div class="form-field full-width notification-row">
+        <label class="field-label">Quero ser notificado sobre as atualizações da tarefa por e-mail</label>
+        <ion-toggle formControlName="notifyAdmin" color="primary" class="custom-toggle"></ion-toggle>
+      </div>
+    </div>
+
+    <!-- Botões -->
+    <div class="form-actions">
+      <ion-button type="button" expand="block" color="danger" (click)="limpar()" class="btn-limpar">
+        Limpar
+      </ion-button>
+
+      <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid" class="btn-confirmar">
+        Confirmar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

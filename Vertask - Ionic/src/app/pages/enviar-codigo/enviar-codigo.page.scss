@@ -1,0 +1,153 @@
+/* Fundo e layout base */
+.codigo-bg {
+  --background: linear-gradient(135deg, #2980f2 0%, #4f8cff 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.codigo-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cartão central */
+.codigo-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  padding: 36px 32px;
+  min-width: 420px;
+  max-width: 92vw;
+  text-align: center;
+  z-index: 2;
+}
+
+/* Títulos */
+.codigo-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25em;
+  color: #111;
+}
+
+.codigo-subtitle {
+  color: #6c757d;
+  margin-bottom: 1.25em;
+  font-size: 1rem;
+}
+
+/* Inputs e botões */
+ion-item {
+  --background: transparent;
+  margin-bottom: 12px;
+  --min-height: 56px;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
+ion-item ion-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1f2937;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+ion-input {
+  font-size: 1.2rem;
+  text-align: center;
+  letter-spacing: 4px;
+  font-weight: 600;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  color: #111;
+}
+
+/* Estilo do campo de código tipo boxes separadas */
+/* Inputs separados (um dígito por caixa) */
+.pin-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.pin-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.pin-inputs {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.pin-input {
+  width: 56px;
+  height: 64px;
+  border-radius: 12px;
+  border: 1px solid rgba(2,6,23,0.06);
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+  text-align: center;
+  font-family: 'Roboto Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto', monospace;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #0b1220;
+  outline: none;
+  padding: 6px 8px;
+}
+
+.pin-input::placeholder {
+  color: rgba(11,18,32,0.12);
+}
+
+.pin-input:focus {
+  border-color: rgba(99,102,241,0.95);
+  box-shadow: 0 10px 30px rgba(99,102,241,0.12);
+}
+
+/* Responsividade */
+@media (max-width: 420px) {
+  .pin-inputs {
+    gap: 8px;
+  }
+  .pin-input {
+    width: 44px;
+    height: 52px;
+    font-size: 1.6rem;
+  }
+}
+
+ion-button {
+  margin-top: 16px;
+  --border-radius: 10px;
+  font-weight: 600;
+}
+
+/* Botões extras */
+.codigo-buttons {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Gradiente principal */
+ion-button[color="primary"] {
+  background: linear-gradient(90deg, #6b3df8 0%, #8c3bff 100%);
+  color: #fff;
+}

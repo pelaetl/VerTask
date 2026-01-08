@@ -1,0 +1,216 @@
+<ion-menu side="start" menuId="main-menu" contentId="main-content" class="side-menu">
+  <ion-header>
+    <ion-toolbar class="menu-toolbar">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list class="menu-list">
+      <ion-item routerLink="/add-tarefa" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+        <ion-label>Criar Tarefa</ion-label>
+      </ion-item>
+      <ion-item routerLink="/todas-tarefas" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="list-outline"></ion-icon>
+        <ion-label>Todas Tarefas</ion-label>
+      </ion-item>
+      <ion-item routerLink="/minhas-tarefas" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label>Minhas Tarefas</ion-label>
+      </ion-item>
+      <ion-item routerLink="/funcionarios" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="people-outline"></ion-icon>
+        <ion-label>Funcionários</ion-label>
+      </ion-item>
+      <ion-item routerLink="/empresas" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="business-outline"></ion-icon>
+        <ion-label>Clientes</ion-label>
+      </ion-item>
+      <ion-item routerLink="/setores" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="podium-outline"></ion-icon>
+        <ion-label>Setores</ion-label>
+      </ion-item>
+      <ion-item routerLink="/calendario-tarefas" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="calendar-outline"></ion-icon>
+        <ion-label>Calendário</ion-label>
+      </ion-item>
+      <ion-item routerLink="/relatorio-funcionario" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="analytics-outline"></ion-icon>
+        <ion-label>Relatório de Funcionários</ion-label>
+      </ion-item>
+      <ion-item routerLink="/relatorio-empresa" routerLinkActive="active" lines="none">
+        <ion-icon slot="start" name="bar-chart-outline"></ion-icon>
+        <ion-label>Relatório de Clientes</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      <div class="title-search-row">
+        <span class="logo-title">VerTask</span>
+        <!-- <ion-searchbar placeholder="Buscar tarefas" class="searchbar"></ion-searchbar> -->
+      </div>
+    </ion-title>
+    <ion-buttons slot="end">
+      <!-- Notification button -->
+      <!-- <ion-button (click)="abrirNotificacoes($event)" class="notification-button" slot="end">
+        <ion-icon name="notifications-outline" class="notification-icon"></ion-icon>
+        <ion-badge *ngIf="notificacoesCount > 0" color="danger" class="notification-badge">{{ notificacoesCount }}</ion-badge>
+      </ion-button> -->
+
+      <!-- Profile button -->
+      <ion-button (click)="abrirPerfil($event)" class="profile-button">
+        <ion-avatar *ngIf="avatarUrl; else defaultIcon" class="profile-avatar">
+          <img [src]="avatarUrl" alt="Foto do usuário" />
+        </ion-avatar>
+        <ng-template #defaultIcon>
+          <ion-icon name="person-circle-outline" class="profile-icon"></ion-icon>
+        </ng-template>
+        <span class="profile-name">{{ administrador.nome}}</span>
+      </ion-button>
+    </ion-buttons>
+    <!-- Profile popover -->
+    <ion-popover [isOpen]="popoverAberto" [event]="popoverEvento" (didDismiss)="popoverAberto = false">
+      <ng-template>
+        <ion-list>
+          <ion-item button (click)="editarPerfil()">Editar Perfil
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+          </ion-item>
+          <ion-item button (click)="sair()">
+            Sair
+            <ion-icon slot="start" name="exit-outline"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
+
+    <!-- Notifications popover -->
+    <!-- <ion-popover [isOpen]="notificacoesAberto" [event]="notificacoesEvento" (didDismiss)="notificacoesAberto = false">
+      <ng-template>
+        <ion-list>
+          <ion-item *ngIf="notificacoes.length === 0">Nenhuma notificação</ion-item>
+          <ion-item *ngFor="let n of notificacoes" (click)="irParaTarefa(n.idTarefa)">
+            <ion-item *ngFor="let n of notificacoes">
+            <ion-label>
+              <h3>{{ n.nome }}</h3>
+              <p>{{ n.descricao }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover> -->
+
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" class="inicio-admin-content" id="main-content">
+  <div class="inicio-admin-grid">
+    <div class="inicio-admin-col-esquerda">
+      <h2 class="section-title">Prioridades</h2>
+      <div class="prioridades-container">
+        <ion-list class="prioridades-list" *ngIf="tarefasFavoritas.length > 0; else semPrioridades">
+          <ion-item
+            *ngFor="let tarefa of tarefasFavoritas"
+            class="prioridade-item"
+            lines="none"
+            button
+            detail="false"
+            [routerLink]="['/detalhes-tarefa', tarefa.idTarefa]">
+            <div class="prioridade-indicador" [ngClass]="prioridadeIndicadorClass(tarefa)"></div>
+            <ion-label>
+              <div class="prioridade-header">
+                <h3>{{ tarefa.nome }}</h3>
+                <ion-badge [color]="statusBadgeColor(tarefa.statusTarefa)">
+                  {{ tarefa.statusTarefa | titlecase }}
+                </ion-badge>
+              </div>
+              <div class="prioridade-footer">
+                <ion-icon name="calendar-outline"></ion-icon>
+                <span>{{ tarefa.dataEntrega | date:'dd/MM/yyyy' }}</span>
+                <span class="prioridade-prazo">{{ prazoLabel(tarefa) }}</span>
+              </div>
+            </ion-label>
+            <ion-icon slot="end" name="chevron-forward-outline" class="prioridade-chevron"></ion-icon>
+          </ion-item>
+        </ion-list>
+        <ng-template #semPrioridades>
+          <div class="prioridades-empty">
+            <ion-icon name="flag-outline"></ion-icon>
+            <p>Nenhuma tarefa marcada como prioridade.</p>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- Calendário de Tarefas (temporariamente oculto) -->
+    </div>
+
+    <div class="inicio-admin-col-direita">
+
+      <h2 class="section-title">Minhas Tarefas</h2>
+      <div class="resumo-row">
+        <ion-card class="funcionario-card">
+          <ion-card-content>
+            <div class="chart-wrapper" style="height:240px; padding:12px;">
+              <canvas #doughnutCanvas></canvas>
+            </div>
+            <div class="chart-summary">
+              <div class="chart-chips">
+                <span class="chart-chip chip-pendente">Pendente: {{ statusCounts.pend }}</span>
+                <span class="chart-chip chip-andamento">Em Andamento: {{ statusCounts.and }}</span>
+                <span class="chart-chip chip-concluida">Concluída: {{ statusCounts.concl }}</span>
+                <span class="chart-chip chip-atrasada">Atrasada: {{ statusCounts.atra }}</span>
+              </div>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <!-- <ion-card class="funcionario-card">
+          <ion-card-content>
+            <div class="funcionario-info">
+              <div class="funcionario-avatar">r</div>
+              <div>
+                <div class="funcionario-nome">ramonzin</div>
+                <div class="funcionario-total">Total: 0 tarefas</div>
+              </div>
+            </div>
+            <div class="chart-wrapper" style="height:240px; padding:12px;">
+              <canvas #doughnutCanvas></canvas>
+            </div>
+          </ion-card-content>
+        </ion-card> -->
+      </div>
+
+      <!-- <h2 class="section-title">Resumo de Tarefas por Funcionário</h2>
+      <div class="resumo-row">
+        <ion-card class="funcionario-card">
+          <ion-card-content>
+            <div class="chart-wrapper" style="height:240px; padding:12px;">
+              <canvas #doughnutCanvas></canvas>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <ion-card class="funcionario-card">
+          <ion-card-content>
+            <div class="funcionario-info">
+              <div class="funcionario-avatar">r</div>
+              <div>
+                <div class="funcionario-nome">ramonzin</div>
+                <div class="funcionario-total">Total: 0 tarefas</div>
+              </div>
+            </div>
+            <div class="chart-wrapper" style="height:240px; padding:12px;">
+              <canvas #doughnutCanvas></canvas>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <ion-button fill="outline" class="relatorio-btn">Ver relatório completo</ion-button> -->
+    </div>
+  </div>
+</ion-content>

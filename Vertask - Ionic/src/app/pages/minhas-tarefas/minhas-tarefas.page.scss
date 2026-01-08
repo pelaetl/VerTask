@@ -1,0 +1,353 @@
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #2563eb;
+  margin: 16px 0 8px;
+}
+
+.title-search-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo-title {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.2rem;
+   margin-left: 30px;
+}
+
+/* Kanban styles */
+.kanban-wrapper {
+  padding: 8px 4px;
+}
+.kanban-columns {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+}
+.kanban-column {
+  flex: 1 1 0;
+  background: var(--ion-color-step-50, #f7fafc);
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 220px;
+}
+.kanban-list {
+  min-height: 120px;
+}
+.kanban-card {
+  background: var(--ion-card-background, #ffffff);
+  margin-bottom: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+.kanban-card-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.kanban-title { font-weight:700; color: rgba(0,0,0,0.6); margin:0 0 8px; }
+.kanban-card-desc { margin:6px 0; color:#555 }
+.view-mode-segment { margin-top: 8px }
+
+.tarefas-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.tarefas-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.tarefas-filtros-secundarios {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tarefas-searchbar {
+  width: min(320px, 100%);
+  --background: #f1f5f9;
+  --border-radius: 999px;
+  --box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --height: 40px;
+  --color: #0f172a;
+  --placeholder-color: #94a3b8;
+  --icon-color: #2563eb;
+}
+
+.tarefas-searchbar .searchbar-input-container {
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.tarefas-date-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f5f9;
+  border-radius: 999px;
+  padding: 6px 14px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  min-width: 210px;
+  height: 40px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  transition: box-shadow 0.2s ease;
+}
+
+.tarefas-date-input:hover,
+.tarefas-date-input:focus-within {
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+.tarefas-date-input ion-icon {
+  font-size: 1.15rem;
+  color: #2563eb;
+}
+
+.tarefas-date-button::part(native) {
+  background: transparent;
+  border: none;
+  padding: 0;
+  height: auto;
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.tarefas-date-button::part(icon) {
+  display: none;
+}
+
+.tarefas-date-clear {
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --padding-top: 0;
+  --padding-bottom: 0;
+  margin: 0;
+  color: #64748b;
+}
+
+.tarefas-status-select {
+  --background: #f1f5f9;
+  --color: #0f172a;
+  --placeholder-color: #94a3b8;
+  --padding-start: 18px;
+  --padding-end: 36px;
+  --min-width: 190px;
+  --border-radius: 999px;
+  --indicator-color: #2563eb;
+  --border-color: transparent;
+  --highlight-color-focused: rgba(37, 99, 235, 0.16);
+  height: 40px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  transition: box-shadow 0.2s ease;
+}
+
+.tarefas-status-select:hover,
+.tarefas-status-select:focus-within {
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+
+.tarefas-status-select::part(container) {
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  min-height: 40px;
+}
+
+.tarefas-status-select::part(text) {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0f172a;
+}
+
+.tarefas-status-select::part(placeholder) {
+  color: #94a3b8;
+}
+
+.tarefa-date-popover {
+  --offset-y: 8px;
+  --offset-x: 150px;
+}
+
+.tarefa-date-popover::part(content) {
+  border-radius: 18px;
+  transform: translateX(40%);
+  transform-origin: top right;
+}
+
+.tarefas-container {
+  /* remove white card background to match dark app theme */
+  background: transparent;
+  border-radius: 0;
+  padding: 12px 4px;
+  box-shadow: none;
+}
+
+.tarefas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+}
+
+.tarefa-item {
+  --background: #ffffff;
+  background: #ffffff;
+  --inner-padding-top: 12px;
+  --inner-padding-bottom: 12px;
+  --inner-padding-end: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  padding: 14px 10px;
+  border-bottom: none;
+  margin-bottom: 12px;
+}
+
+.tarefa-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tarefa-indicador {
+  width: 6px;
+  align-self: stretch;
+  margin-right: 18px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #6366f1 0%, #4338ca 100%);
+}
+
+.tarefa-indicador--alerta {
+  background: linear-gradient(180deg, #facc15 0%, #ea580c 100%);
+}
+
+.tarefa-indicador--em-andamento {
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+}
+
+.tarefa-indicador--pendente {
+  background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+}
+
+.tarefa-indicador--atrasada {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+}
+
+.tarefa-indicador--concluida {
+  background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+}
+
+.tarefa-indicador--concluida-atrasada {
+  background: linear-gradient(180deg, #1e7c34 0%, #0f3d1f 100%);
+}
+
+.tarefa-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.tarefa-nome-priority {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tarefa-priority-star {
+  font-size: 1.2rem;
+  color: #fbbf24;
+  filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.4));
+}
+
+.tarefa-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tarefa-pin {
+  font-size: 1.2rem;
+  color: #f97316;
+  filter: drop-shadow(0 2px 4px rgba(249, 115, 22, 0.3));
+}
+
+.tarefa-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.tarefa-descricao {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.tarefa-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.tarefa-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tarefa-info ion-icon {
+  font-size: 1.1rem;
+  color: #2563eb;
+}
+
+.tarefa-prazo {
+  font-weight: 600;
+  color: #374151;
+}
+
+.tarefa-chevron {
+  color: #9ca3af;
+  font-size: 1.2rem;
+}
+
+.tarefas-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 40px 16px;
+  color: #6b7280;
+  text-align: center;
+}
+
+.tarefas-empty ion-icon {
+  font-size: 2.4rem;
+  color: #22c55e;
+}

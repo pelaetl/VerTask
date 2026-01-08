@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <ion-title>Clientes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="clientes-header">
+    <h2 class="section-title">Clientes</h2>
+    <ion-button expand="block" (click)="adicionarCliente()">
+      <ion-icon slot="start" name="add-circle-outline"></ion-icon>
+      Novo Cliente
+    </ion-button>
+  </div>
+
+  <ion-spinner *ngIf="carregando" class="spinner-center"></ion-spinner>
+
+  <ion-list class="clientes-list" *ngIf="!carregando && clientes.length > 0; else semClientes">
+    <ion-item *ngFor="let cliente of clientes" class="cliente-item" lines="none">
+      <ion-label>
+        <div class="cliente-header">
+          <h3>{{ cliente.nome }}</h3>
+          <span class="cliente-tipo">{{ cliente.tipo === 'empresa' ? 'Empresa' : 'Pessoa' }}</span>
+        </div>
+        <div class="cliente-info" *ngIf="cliente.email">
+          <ion-icon name="mail-outline"></ion-icon>
+          <span>{{ cliente.email }}</span>
+        </div>
+        <div class="cliente-info" *ngIf="cliente.telefone">
+          <ion-icon name="call-outline"></ion-icon>
+          <span>{{ cliente.telefone }}</span>
+        </div>
+      </ion-label>
+      <div class="cliente-actions" slot="end">
+        <ion-button fill="clear" size="small" color="primary" (click)="editarCliente(cliente); $event.stopPropagation()">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" size="small" color="danger" (click)="excluir(cliente); $event.stopPropagation()">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #semClientes>
+    <div class="clientes-empty" *ngIf="!carregando">
+      <ion-icon name="business-outline"></ion-icon>
+      <p>Nenhum cliente cadastrado.</p>
+      <ion-button (click)="adicionarCliente()">
+        <ion-icon slot="start" name="add-circle"></ion-icon>
+        Adicionar Cliente
+      </ion-button>
+    </div>
+  </ng-template>
+</ion-content>

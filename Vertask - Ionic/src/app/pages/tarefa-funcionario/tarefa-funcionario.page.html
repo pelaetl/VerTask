@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button (click)="voltar()" defaultHref="/relatorio-funcionario"></ion-back-button>
+    </ion-buttons>
+    <div class="title-search-row">
+      <ion-router-link routerLink="/relatorio-funcionario" class="logo-title">VerTask</ion-router-link>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <div class="tarefas-header">
+    <h2 class="section-title">Tarefas de {{ funcionario?.nome || 'Funcionário' }}</h2>
+    <div class="tarefas-filtros">
+      <ion-searchbar placeholder="Buscar tarefa" [value]="searchTerm" (ionInput)="onSearchChange($event)" class="tarefas-searchbar" show-clear-button="focus"></ion-searchbar>
+    </div>
+  </div>
+
+  <ng-container *ngIf="tarefasFiltradas?.length; else vazio">
+    <div class="tarefas-container">
+      <ion-list class="tarefas-list">
+        <ion-item
+          *ngFor="let tarefa of tarefasFiltradas"
+          class="tarefa-item"
+          lines="none">
+          <div class="tarefa-indicador" [ngClass]="tarefaIndicadorClass(tarefa)"></div>
+          <ion-label>
+            <div class="tarefa-header">
+              <h3>{{ tarefa?.nome }}</h3>
+            </div>
+            <div class="tarefa-footer" *ngIf="tarefa?.dataVencimento || tarefa?.dataEntrega">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <span>{{ (tarefa?.dataVencimento || tarefa?.dataEntrega) | date: 'dd/MM/yyyy' }}</span>
+            </div>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ng-container>
+
+  <ng-template #vazio>
+    <div class="empty">
+      <ion-icon name="document-outline" class="empty-icon"></ion-icon>
+      <p>Nenhuma tarefa encontrada para este funcionário.</p>
+    </div>
+  </ng-template>
+
+</ion-content>

@@ -1,0 +1,250 @@
+.app-toolbar {
+  --background: #1c1c1c;
+  --color: #e2e8f0;
+  --border-width: 0 0 1px 0;
+  --border-color: rgba(255, 255, 255, 0.06);
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --min-height: 56px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.logo-title {
+  color: #2563eb;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 30px;
+}
+
+// Título da seção
+.section-title {
+  font-size: 1.5em;
+  font-weight: 600;
+  color: #2563eb;
+  margin: 16px 0 16px;
+}
+
+// Container principal do conteúdo
+.content-container {
+  padding: 0 4px 80px 4px;
+  width: 100%;
+}
+
+.tarefas-container {
+  background: transparent;
+  border-radius: 0;
+  padding: 12px 4px;
+  box-shadow: none;
+}
+
+.tarefas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 0;
+}
+
+.tarefa-item {
+  --background: #ffffff;
+  background: #ffffff;
+  --inner-padding-top: 12px;
+  --inner-padding-bottom: 12px;
+  --inner-padding-end: 12px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  padding: 14px 10px;
+  border-bottom: none;
+  display: flex;
+  align-items: stretch;
+  margin-bottom: 12px;
+}
+
+.tarefa-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.tarefa-indicador {
+  width: 6px;
+  align-self: stretch;
+  margin-right: 18px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #6366f1 0%, #4338ca 100%);
+}
+
+.tarefa-indicador--em-andamento {
+  background: linear-gradient(180deg, #fbbf24 0%, #d97706 100%);
+}
+
+.tarefa-indicador--pendente {
+  background: linear-gradient(180deg, #3b82f6 0%, #1e40af 100%);
+}
+
+.tarefa-indicador--atrasada {
+  background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+}
+
+.tarefa-indicador--concluida {
+  background: linear-gradient(180deg, #34d399 0%, #059669 100%);
+}
+
+.tarefa-indicador--concluida-atrasada {
+  background: linear-gradient(180deg, #1e7c34 0%, #0f3d1f 100%);
+}
+
+.tarefa-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+.tarefa-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.tarefa-descricao {
+  margin: 4px 0 0;
+  color: #6b7280;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.tarefa-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.tarefa-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tarefa-info ion-icon {
+  font-size: 1.1rem;
+  color: #2563eb;
+}
+
+.tarefa-prazo {
+  font-weight: 600;
+  color: #374151;
+}
+
+.tarefa-cliente {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.tarefa-cliente ion-icon {
+  font-size: 1rem;
+  color: #2563eb;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: #94a3b8;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.empty p {
+  margin: 0;
+  font-size: 1rem;
+  color: #64748b;
+}
+
+// Filtros
+.tarefas-header {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 16px;
+}
+
+.section-title {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin-bottom: 0;
+}
+
+.tarefas-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+  flex: 1 1 auto;
+}
+
+.tarefas-filtros-secundarios {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tarefas-searchbar {
+  width: min(320px, 100%);
+  --background: #f1f5f9;
+  --border-radius: 999px;
+  --box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --height: 40px;
+  --color: #0f172a;
+  --placeholder-color: #94a3b8;
+  --icon-color: #2563eb;
+}
+
+.tarefas-select {
+  --background: #f1f5f9;
+  --color: #0f172a;
+  --placeholder-color: #94a3b8;
+  --padding-start: 18px;
+  --padding-end: 36px;
+  --min-width: 190px;
+  --border-radius: 999px;
+  --indicator-color: #2563eb;
+  --border-color: transparent;
+  --highlight-color-focused: rgba(37, 99, 235, 0.16);
+  height: 40px;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  transition: box-shadow 0.2s ease;
+}
+
+.tarefas-select:hover,
+.tarefas-select:focus-within {
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.18);
+}
+
+ion-button[color="primary"] {
+  --color: #2563eb;
+  --ripple-color: rgba(37, 99, 235, 0.16);
+}

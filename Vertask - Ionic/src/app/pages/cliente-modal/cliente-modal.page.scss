@@ -1,0 +1,52 @@
+.cliente-modal-content {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.cliente-card {
+  width: 100%;
+  max-width: 720px;
+  background: var(--ion-background-color, #fff);
+  color: var(--ion-text-color, #000);
+  border-radius: 8px;
+  padding: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+}
+
+.cliente-name {
+  margin: 0 0 12px 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.cliente-row {
+  display: flex;
+  gap: 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed rgba(0,0,0,0.06);
+}
+
+.label {
+  flex: 0 0 140px;
+  color: var(--ion-color-medium, #666);
+  font-size: 0.9rem;
+}
+
+.value {
+  flex: 1 1 auto;
+  color: var(--ion-text-color, #111);
+  word-break: break-word;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cliente-card {
+    background: #121212;
+    color: #e6e6e6;
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  .cliente-row { border-bottom-color: rgba(255,255,255,0.03); }
+}

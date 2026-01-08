@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true" class="cadFuncionario-bg">
+  <div class="cadFuncionario-container">
+    <div class="cadFuncionario-card">
+      <h1 class="cadFuncionario-title">Cadastro Funcionário</h1>
+      <p class="cadFuncionario-subtitle">Crie sua conta no VerTask</p>
+      <form [formGroup]="formGroup" (ngSubmit)="salvar()">
+
+        <ion-item>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-label position="stacked">Nome</ion-label>
+          <ion-input type="text" formControlName="nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="mail-outline"></ion-icon>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input type="email" formControlName="email" inputmode="email"></ion-input>
+        </ion-item>
+        <ion-note
+          color="danger"
+          *ngIf="formGroup.get('email')?.touched && formGroup.get('email')?.hasError('email')"
+        >
+          Informe um email válido (exemplo&#64;dominio.com).
+        </ion-note>
+
+        <ion-item>
+          <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+          <ion-label position="stacked">Senha</ion-label>
+          <ion-input type="password" formControlName="senha"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" name="business-outline"></ion-icon>
+          <ion-label position="stacked">Setor</ion-label>
+          <ion-select okText="Confirmar" cancelText="Cancelar" placeholder="Selecione um setor" formControlName="setor">
+            <ion-select-option *ngFor="let setor of setores" [value]="setor.idSetor">{{setor.nome}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">Criar Conta</ion-button>
+      </form>
+
+      <div class="login-links">
+        <p>Já tem uma conta?</p>
+        <ion-button routerLink="/login" expand="block" color="primary">Login</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

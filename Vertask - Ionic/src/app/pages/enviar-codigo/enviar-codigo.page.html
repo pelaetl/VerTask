@@ -1,0 +1,48 @@
+<ion-content [fullscreen]="true" class="codigo-bg">
+  <div class="codigo-container">
+    <div class="codigo-card">
+      <h1 class="codigo-title">Verificação de Código</h1>
+      <p class="codigo-subtitle">Insira o código de 6 dígitos enviado ao seu e-mail.</p>
+
+      <form [formGroup]="formGroup" (ngSubmit)="confirmarCodigo()">
+        <div class="pin-group" aria-label="Código de verificação">
+          <label class="pin-label">Código</label>
+          <div formArrayName="codigo" class="pin-inputs">
+            <input *ngFor="let c of codigoControls.controls; let i = index"
+                   [id]="'digit-'+i"
+                   class="pin-input"
+                   type="text"
+                   inputmode="numeric"
+                   maxlength="1"
+                   autocomplete="one-time-code"
+                   [formControlName]="i"
+                   (input)="onDigitInput($event, i)"
+                   (keydown)="onKeyDown($event, i)"
+                   (paste)="onPaste($event)"
+                   [attr.aria-label]="'Dígito ' + (i+1)" />
+          </div>
+        </div>
+        <ion-note color="danger" *ngIf="formInvalid">
+          O código deve conter exatamente 6 números.
+        </ion-note>
+
+        <ion-button type="submit" expand="block" color="primary" [disabled]="!formGroup.valid">
+          Confirmar
+          <ion-icon slot="end" name="checkmark-circle-outline"></ion-icon>
+        </ion-button>
+      </form>
+
+      <div class="codigo-buttons">
+        <ion-button fill="outline" color="medium" expand="block" (click)="enviarCodigoNovamente()">
+          Enviar código novamente
+          <ion-icon slot="end" name="refresh-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" color="danger" expand="block" (click)="cancelar()">
+          Cancelar
+          <ion-icon slot="end" name="close-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

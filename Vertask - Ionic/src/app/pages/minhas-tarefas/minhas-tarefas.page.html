@@ -1,0 +1,270 @@
+<!-- <ion-menu side="start" menuId="main-menu" contentId="main-content">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item routerLink="/inicio-administrador">Início</ion-item>
+      <ion-item routerLink="/minhas-tarefas">Todas Tarefas</ion-item>
+      <ion-item routerLink="/minhas-tarefas">Minhas Tarefas</ion-item>
+      <ion-item routerLink="/cadastro-funcionario">Funcionários</ion-item>
+      <ion-item routerLink="/tarefaes">Setores</ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu> -->
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <div class="title-search-row">
+      <ion-router-link [routerLink]="inicioRoute" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+
+    <!-- <ion-popover [isOpen]="popoverAberto" [event]="popoverEvento" (didDismiss)="popoverAberto = false">
+      <ng-template>
+        <ion-list>
+          <ion-item button (click)="editarPerfil()">Editar Perfil
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+          </ion-item>
+          <ion-item button (click)="sair()">
+            Sair
+            <ion-icon slot="start" name="exit-outline"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ng-template>
+    </ion-popover> -->
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" class="ion-padding" id="main-content">
+  <div class="tarefas-header">
+    <h2 class="section-title">Minhas Tarefas</h2>
+    <!-- Let `[(ngModel)]="viewMode"` control the initial segment value (no hardcoded value) -->
+    <ion-segment [(ngModel)]="viewMode" class="view-mode-segment">
+      <ion-segment-button value="kanban">
+          <ion-label>Kanban</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="list">
+          <ion-label>Lista</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <div class="tarefas-filtros" *ngIf="viewMode === 'list'">
+      <ion-searchbar
+        placeholder="Buscar tarefas"
+        [value]="searchTerm"
+        (ionInput)="onSearchTermChange($event)"
+        show-clear-button="focus"
+        class="tarefas-searchbar"
+      ></ion-searchbar>
+
+      <div class="tarefas-filtros-secundarios">
+        <div class="tarefas-date-input">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-datetime-button
+            datetime="minhas-tarefas-data"
+            class="tarefas-date-button"
+          ></ion-datetime-button>
+          <ion-button
+            fill="clear"
+            size="small"
+            color="medium"
+            class="tarefas-date-clear"
+            *ngIf="selectedDate"
+            (click)="clearDateFilter()"
+          >
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="tarefas-date-input">
+          <ion-icon name="calendar-number-outline"></ion-icon>
+          <ion-datetime-button
+            datetime="minhas-tarefas-mes"
+            class="tarefas-date-button"
+          ></ion-datetime-button>
+          <ion-button
+            fill="clear"
+            size="small"
+            color="medium"
+            class="tarefas-date-clear"
+            *ngIf="selectedMonth"
+            (click)="clearMonth()"
+          >
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+
+        <div class="tarefas-date-input">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <ion-datetime-button
+            datetime="minhas-tarefas-ano"
+            class="tarefas-date-button"
+          ></ion-datetime-button>
+          <ion-button
+            fill="clear"
+            size="small"
+            color="medium"
+            class="tarefas-date-clear"
+            *ngIf="selectedYear"
+            (click)="clearYear()"
+          >
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+          </ion-button>
+        </div>
+
+        <ion-select
+          interface="popover"
+          [value]="selectedStatus"
+          (ionChange)="onStatusChange($event)"
+          class="tarefas-status-select"
+        >
+          <ion-select-option *ngFor="let option of statusOptions" [value]="option.value">
+            {{ option.label }}
+          </ion-select-option>
+        </ion-select>
+      </div>
+    </div>
+  </div>
+
+  <ion-popover
+    trigger="minhas-tarefas-data"
+    [showBackdrop]="false"
+    [keepContentsMounted]="true"
+    reference="trigger"
+    side="bottom"
+    alignment="end"
+    cssClass="tarefa-date-popover"
+  >
+    <ng-template>
+      <ion-datetime
+        id="minhas-tarefas-data"
+        presentation="date"
+        [value]="selectedDate || undefined"
+        (ionChange)="onDateChange($event)"
+      ></ion-datetime>
+    </ng-template>
+  </ion-popover>
+
+  <ion-popover
+    trigger="minhas-tarefas-mes"
+    [showBackdrop]="false"
+    [keepContentsMounted]="true"
+    reference="trigger"
+    side="bottom"
+    alignment="center"
+    cssClass="tarefa-date-popover"
+  >
+    <ng-template>
+      <ion-datetime
+        id="minhas-tarefas-mes"
+        presentation="month-year"
+        [value]="selectedMonth || undefined"
+        (ionChange)="onMonthChange($event)"
+      ></ion-datetime>
+    </ng-template>
+  </ion-popover>
+
+  <ion-popover
+    trigger="minhas-tarefas-ano"
+    [showBackdrop]="false"
+    [keepContentsMounted]="true"
+    reference="trigger"
+    side="bottom"
+    alignment="center"
+    cssClass="tarefa-date-popover"
+  >
+    <ng-template>
+      <ion-datetime
+        id="minhas-tarefas-ano"
+        presentation="year"
+        [value]="selectedYear || undefined"
+        (ionChange)="onYearChange($event)"
+      ></ion-datetime>
+    </ng-template>
+  </ion-popover>
+
+  <div class="tarefas-container">
+    <!-- LIST VIEW -->
+    <ion-list class="tarefas-list" *ngIf="viewMode === 'list' && tarefasFiltradas.length > 0; else listEmpty">
+      <ion-item
+        *ngFor="let tarefa of tarefasFiltradas"
+        class="tarefa-item"
+        button
+        detail="false"
+        lines="none"
+        [routerLink]="['/detalhes-tarefa', tarefa.idTarefa]">
+        <div class="tarefa-indicador" [ngClass]="tarefaIndicadorClass(tarefa)"></div>
+        <ion-label>
+          <div class="tarefa-header">
+            <div class="tarefa-nome-priority">
+              <ion-icon *ngIf="tarefa.favorita" name="star" class="tarefa-priority-star"></ion-icon>
+              <h3>{{ tarefa.nome }}</h3>
+            </div>
+            <ion-badge [color]="statusBadgeColor(tarefa.statusTarefa)">{{ statusLabel(tarefa.statusTarefa) }}</ion-badge>
+          </div>
+          <div class="tarefa-footer">
+            <div class="tarefa-info">
+              <ion-icon name="calendar-outline"></ion-icon>
+              <span>{{ tarefa.dataEntrega | date:'dd/MM/yyyy' }}</span>
+            </div>
+            <span class="tarefa-prazo">{{ prazoLabel(tarefa) }}</span>
+          </div>
+        </ion-label>
+        <ion-button
+          *ngIf="podeVerObservacao(tarefa)"
+          fill="clear"
+          size="small"
+          color="medium"
+          (click)="verObservacao(tarefa, $event)"
+          aria-label="Ver comentário">
+          <ion-icon slot="icon-only" name="chatbox-ellipses-outline"></ion-icon>
+        </ion-button>
+        <ion-icon slot="end" name="chevron-forward-outline" class="tarefa-chevron"></ion-icon>
+      </ion-item>
+    </ion-list>
+
+    <!-- KANBAN VIEW -->
+    <div *ngIf="viewMode === 'kanban'" class="kanban-wrapper">
+      <div class="kanban-columns" cdkDropListGroup>
+        <div class="kanban-column" *ngFor="let status of displayStatuses">
+          <h3 class="kanban-title">{{ statusLabel(status) }}</h3>
+          <div
+            cdkDropList
+            id="kanban-{{status}}"
+            [cdkDropListData]="kanban[status]"
+            class="kanban-list"
+            [cdkDropListConnectedTo]="getConnectedIds(status)"
+            [cdkDropListEnterPredicate]="canEnter"
+            (cdkDropListDropped)="drop($event, status)">
+            <div class="kanban-card" *ngFor="let t of kanban[status]" cdkDrag [cdkDragData]="t">
+              <div class="kanban-card-header">
+                <strong>{{ t.nome }}</strong>
+                <ion-badge [color]="statusBadgeColor(t.statusTarefa)">{{ statusLabel(t.statusTarefa) }}</ion-badge>
+              </div>
+              <div class="kanban-card-footer">
+                <small>{{ prazoLabel(t) }}</small>
+                <ion-button fill="clear" size="small" (click)="verTarefa(t)">Abrir</ion-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #listEmpty>
+      <ng-container *ngIf="viewMode === 'list'">
+        <div class="tarefas-empty">
+          <ion-icon name="checkmark-done-outline"></ion-icon>
+          <p *ngIf="tarefas.length === 0">Nenhuma tarefa atribuída no momento.</p>
+          <p *ngIf="tarefas.length > 0">Nenhuma tarefa encontrada para "{{ searchTerm }}".</p>
+        </div>
+      </ng-container>
+    </ng-template>
+  </div>
+</ion-content>

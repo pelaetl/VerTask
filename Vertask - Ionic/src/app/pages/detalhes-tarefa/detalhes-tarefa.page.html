@@ -1,0 +1,169 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="app-toolbar">
+    <!-- <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons> -->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/minhas-tarefas"></ion-back-button>
+    </ion-buttons>
+    <div class="title-search-row">
+      <ion-router-link routerLink="/inicio-administrador" class="logo-title">
+        VerTask
+      </ion-router-link>
+    </div>
+
+    <!-- Anexo (moved to content for better layout) -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="task-details">
+    <!-- Título da Tarefa -->
+    <div class="task-title">
+      <div class="title-container">
+        <h1>{{tarefa.nome}}</h1>
+        <ion-badge *ngIf="favorita()" color="primary" class="favorite-badge">
+          <ion-icon name="bookmark"></ion-icon>
+          Prioridade
+        </ion-badge>
+      </div>
+      <ion-button fill="clear" class="chat-btn" (click)="openChat()" title="Abrir chat" aria-label="Abrir chat">
+        <ion-icon slot="icon-only" name="chatbox-outline"></ion-icon>
+        <div *ngIf="temNovasMensagens" class="chat-badge"></div>
+      </ion-button>
+      <ion-button
+        *ngIf="tarefa.statusTarefa !== statusTarefaEnum.Concluida && tarefa.statusTarefa !== statusTarefaEnum.ConcluidaAtrasada"
+        fill="clear"
+        class="favorite-btn"
+        (click)="favoritar()">
+        <ion-icon [name]="favorita() ? 'bookmark' : 'bookmark-outline'" [class.favorited]="favorita()">
+        </ion-icon>
+      </ion-button>
+    </div>
+
+    <!-- Descrição -->
+    <div class="section">
+      <h3>Descrição</h3>
+      <p>{{ tarefa.descricao }}</p>
+    </div>
+
+    <!-- Informações em Grid -->
+    <div class="info-grid">
+      <div class="info-item">
+        <ion-icon name="person-outline"></ion-icon>
+        <div>
+          <span class="label">Responsáveis</span>
+          <!-- <p>{{ getResponsaveis() }}</p> -->
+           <p *ngIf="responsaveisTexto">{{ responsaveisTexto }}</p>
+        <p *ngIf="!responsaveisTexto">Nenhum responsável</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <div>
+          <span class="label">Data de Criação</span>
+          <p>{{ tarefa.dataInicio | date:'dd/MM/yyyy' }}</p>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <ion-icon name="time-outline"></ion-icon>
+        <div>
+          <span class="label">Prazo</span>
+          <div class="prazo-row">
+            <p class="prazo-data">{{ tarefa.dataEntrega | date:'dd/MM/yyyy HH:mm'}}</p>
+            <ion-badge *ngIf="tarefaAtrasada()" color="danger" class="badge-atraso">Atrasada</ion-badge>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <ion-icon name="business-outline"></ion-icon>
+        <div>
+          <span class="label">Cliente</span>
+          <p *ngIf="cliente"><a (click)="openClientePopup()" class="cliente-link" role="button" tabindex="0" (keydown.enter)="openClientePopup()" (keydown.space)="openClientePopup()">{{ cliente.nome }}</a></p>
+          <p *ngIf="!cliente">Nenhum cliente</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Anexo: cartão posicionado abaixo das informações -->
+    <div *ngIf="tarefa?.documentoNome" class="attachment-card">
+      <div class="attachment-header">
+        <h3>Anexo</h3>
+        <p class="attachment-name">{{ tarefa.documentoNome }}</p>
+      </div>
+
+      <div class="attachment-actions">
+        <ion-button size="small" color="primary" (click)="abrirDocumentoEmNovaAba()">Abrir em nova aba</ion-button>
+        <ion-button size="small" fill="outline" color="medium" (click)="alternarVisualizadorInline()">{{ mostrarVisualizador ? 'Fechar visualizador' : 'Visualizar' }}</ion-button>
+      </div>
+
+      <div *ngIf="mostrarVisualizador" class="pdf-viewer">
+        <div class="pdf-toolbar">
+          <div class="pdf-pager">
+            <ion-button size="small" fill="clear" (click)="prevPage()" [disabled]="currentPage<=1">◀</ion-button>
+            <span class="page-info">{{currentPage}} / {{totalPages}}</span>
+            <ion-button size="small" fill="clear" (click)="nextPage()" [disabled]="currentPage>=totalPages">▶</ion-button>
+          </div>
+          <div class="pdf-controls">
+            <ion-button size="small" fill="clear" (click)="zoomOut()">-</ion-button>
+            <ion-button size="small" fill="clear" (click)="zoomIn()">+</ion-button>
+            <ion-button size="small" fill="clear" (click)="rotateCounter()">⤺</ion-button>
+            <ion-button size="small" fill="clear" (click)="rotateClockwise()">⤼</ion-button>
+            <ion-button size="small" fill="clear" (click)="openPdfInNewTab()">Abrir</ion-button>
+            <ion-button size="small" fill="clear" (click)="downloadPdf()">Download</ion-button>
+          </div>
+        </div>
+
+        <div class="pdf-canvas-wrap">
+          <canvas #pdfCanvas class="pdf-canvas"></canvas>
+          <div *ngIf="loadingPdf" class="pdf-loading">Carregando documento...</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="(tarefa.statusTarefa === statusTarefaEnum.Concluida || tarefa.statusTarefa === statusTarefaEnum.ConcluidaAtrasada) && tarefa.observacao?.trim()"
+      class="section">
+      <h3>Observação da conclusão</h3>
+      <p>{{ tarefa.observacao }}</p>
+    </div>
+
+    <div
+      *ngIf="tarefa.statusTarefa === statusTarefaEnum.Concluida || tarefa.statusTarefa === statusTarefaEnum.ConcluidaAtrasada"
+      class="section">
+      <h3>Data de entrega</h3>
+      <p>{{ tarefa.dataEntrega | date:'dd/MM/yyyy HH:mm' }}</p>
+    </div>
+
+    <!-- Botões de Ação -->
+    <div class="action-buttons">
+      <ion-button
+        *ngIf="tarefa.statusTarefa !== statusTarefaEnum.Concluida && tarefa.statusTarefa !== statusTarefaEnum.ConcluidaAtrasada && !exibirBotaoConcluir"
+        expand="block"
+        color="primary"
+        (click)="iniciarTarefa()">
+        Iniciar Tarefa
+      </ion-button>
+
+      <ion-button
+        *ngIf="exibirBotaoConcluir"
+        expand="block"
+        color="success"
+        (click)="concluirTarefa()">
+        Concluir Tarefa
+      </ion-button>
+
+      <div *ngIf="tarefa.statusTarefa === statusTarefaEnum.Concluida" class="status-concluida">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <span>Tarefa concluída</span>
+      </div>
+      <div *ngIf="tarefa.statusTarefa === statusTarefaEnum.ConcluidaAtrasada" class="status-concluida">
+        <ion-icon name="checkmark-circle"></ion-icon>
+        <span>Tarefa concluída atrasada</span>
+      </div>
+    </div>
+  </div>
+</ion-content>
