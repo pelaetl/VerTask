@@ -19,8 +19,118 @@ O VerTask permite cadastrar e gerenciar tarefas, responsáveis, clientes e arqui
 - **Netty/Socket.IO** 
 
 ### Frontend (Ionic/Angular)
-
-
-
+- **Angular** 
+- **Ionic**
+- **Angular CDK**
+- **Chart.js**
+- **PDF.js**
+- **STOMP.js**
+- **Auth0 JWT**
+- **Capacitor**  
+- **TypeScript** 
+- **RxJS** 
+- **Socket.IO Client**
+- **SCSS**
+- **ESLint**
+- **Karma/Jasmine**
 
 ## 📁 Estrutura do Projeto
+```
+projetoCompleto/
+├── VertaskAPI/                    # Backend (Spring Boot)
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   └── resources/
+│   │   │       └── application.properties
+│   │   └── test/
+│   ├── pom.xml                    # Dependências Maven
+│   ├── mvnw / mvnw.cmd            # Maven Wrapper
+│   └── ScriptBD.txt               # Script SQL inicial
+│
+├── Vertask - Ionic/               # Frontend (Ionic/Angular)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── pages/             # Páginas (tarefas, perfil, etc)
+│   │   │   ├── services/          # Serviços (API calls, dados)
+│   │   │   ├── model/             # Modelos/Interfaces
+│   │   │   └── app.module.ts
+│   │   ├── assets/
+│   │   ├── theme/
+│   │   └── index.html
+│   ├── angular.json
+│   ├── ionic.config.json
+│   ├── capacitor.config.ts
+│   ├── package.json
+│   └── tsconfig.json
+│
+└── README.md                      # Este arquivo
+```
+
+## ⚙️ Configuração e Instalação
+### 1. Clone o repositório
+
+
+```bash
+git clone https://github.com/pelaetl/VerTask.git
+cd projetoCompleto
+```
+
+
+### 2. Configurar o Banco de Dados
+
+
+#### Opção A: MySQL local
+Copie o script do arquivo DB_SCHEMA.md anexado neste repositorio 
+
+
+### 3. Configurar o Backend
+
+
+Navegue até `VertaskAPI/src/main/resources/` e crie/edite `application.properties`:
+
+
+```properties
+# Banco de Dados
+spring.datasource.url=jdbc:mysql://localhost:3306/vertask?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+spring.datasource.username=vertask_user
+spring.datasource.password=sua_senha
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+
+
+# Servidor
+server.port=8080
+server.servlet.context-path=/api
+
+
+# JWT (se aplicável)
+jwt.secret=sua_chave_secreta_muito_longa_e_segura_aqui
+jwt.expiration=86400000
+
+
+# Uploads
+upload.dir=./uploads/tarefas
+```
+
+
+### 4. Instalar Dependências
+
+
+**Backend:**
+```bash
+cd VertaskAPI
+./mvnw clean install    # No Windows: mvnw.cmd clean install
+cd ..
+```
+
+
+**Frontend:**
+```bash
+cd "Vertask - Ionic"
+npm install
+cd ..
+```
+
+
+
