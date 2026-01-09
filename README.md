@@ -80,7 +80,7 @@ cd projetoCompleto
 ### 2. Configurar o Banco de Dados
 
 
-#### Opção A: MySQL local
+#### MySQL local
 Copie o script do arquivo DB_SCHEMA.md anexado neste repositorio 
 
 
@@ -121,7 +121,6 @@ upload.dir=./uploads/tarefas
 ```bash
 cd VertaskAPI
 ./mvnw clean install    # No Windows: mvnw.cmd clean install
-cd ..
 ```
 
 
@@ -129,8 +128,54 @@ cd ..
 ```bash
 cd "Vertask - Ionic"
 npm install
-cd ..
 ```
+
+## ▶️ Como Executar
+
+
+### Backend (API)
+
+
+```bash
+cd VertaskAPI
+./mvnw spring-boot:run   # No Windows: mvnw.cmd spring-boot:run
+```
+
+### Frontend (Ionic/Angular)
+
+
+```bash
+cd "Vertask - Ionic"
+npm start        # Equivalente a: ionic serve
+```
+
+## 📜 Scripts Disponíveis
+
+
+### Backend (VertaskAPI)
+
+
+| Comando | Descrição |
+|---------|-----------|
+| `./mvnw clean install` | Compila e instala dependências |
+| `./mvnw spring-boot:run` | Executa a aplicação |
+| `./mvnw test` | Roda testes unitários |
+| `./mvnw clean package` | Gera JAR executável |
+
+
+### Frontend (Vertask - Ionic)
+
+
+| Comando | Descrição |
+|---------|-----------|
+| `npm start` | Servidor de desenvolvimento (porta 4200) |
+| `npm run build` | Build de produção |
+| `npm run test` | Testes (Karma/Jasmine) |
+| `npm run lint` | Linter (ESLint) |
+| `npm run watch` | Build em modo watch |
+| `ionic capacitor add` | Adiciona plataforma nativa (iOS/Android) |
+| `ionic capacitor build ios` | Build para iOS |
+| `ionic capacitor build android` | Build para Android |
 
 
 
