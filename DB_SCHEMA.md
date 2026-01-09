@@ -3,6 +3,10 @@
 Resumo do modelo MySQL utilizado pelo sistema. Ordene as criações conforme a sequência abaixo para respeitar as dependências.
 
 ## Sequência de Criação
+
+create database vertask;
+use vertask;
+
 ```sql
 CREATE TABLE usuario (
   id_usuario     INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
