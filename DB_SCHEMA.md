@@ -4,10 +4,11 @@ Resumo do modelo MySQL utilizado pelo sistema. Ordene as criações conforme a s
 
 ## Sequência de Criação
 
+
+```sql
 create database vertask;
 use vertask;
 
-```sql
 CREATE TABLE usuario (
   id_usuario     INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   nome           VARCHAR(70)  NOT NULL,
