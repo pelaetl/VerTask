@@ -149,33 +149,6 @@ cd "Vertask - Ionic"
 npm start        # Equivalente a: ionic serve
 ```
 
-## 📜 Scripts Disponíveis
-
-
-### Backend (VertaskAPI)
-
-
-| Comando | Descrição |
-|---------|-----------|
-| `./mvnw clean install` | Compila e instala dependências |
-| `./mvnw spring-boot:run` | Executa a aplicação |
-| `./mvnw test` | Roda testes unitários |
-| `./mvnw clean package` | Gera JAR executável |
-
-
-### Frontend (Vertask - Ionic)
-
-
-| Comando | Descrição |
-|---------|-----------|
-| `npm start` | Servidor de desenvolvimento (porta 4200) |
-| `npm run build` | Build de produção |
-| `npm run test` | Testes (Karma/Jasmine) |
-| `npm run lint` | Linter (ESLint) |
-| `npm run watch` | Build em modo watch |
-| `ionic capacitor add` | Adiciona plataforma nativa (iOS/Android) |
-| `ionic capacitor build ios` | Build para iOS |
-| `ionic capacitor build android` | Build para Android |
-
+**Desenvolvido por Pedro de Laet e Ramon de Castro**
 
 
