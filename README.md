@@ -148,6 +148,8 @@ cd VertaskAPI
 cd "Vertask - Ionic"
 npm start        # Equivalente a: ionic serve
 ```
+## 📁 Documentação Completa
+https://docs.google.com/document/d/13ZusiKqUu2w0N-FHyo3qJ9v_1SDz1HgZT4Bum5-6cgA/edit?usp=sharing
 
 **Desenvolvido por Pedro de Laet e Ramon de Castro**
 
