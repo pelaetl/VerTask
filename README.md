@@ -8,8 +8,15 @@ O VerTask permite cadastrar e gerenciar tarefas, responsáveis, clientes e arqui
 ##  Tecnologias
 
 ### Backend (API)
-
-
+- **Java** 24
+- **Spring Boot** 3.5.0
+- **Spring Data JPA** 
+- **Spring Security** 
+- **JWT** 
+- **MySQL** 
+- **Maven** 
+- **Lombok**
+- **Netty/Socket.IO** 
 
 ### Frontend (Ionic/Angular)
 
