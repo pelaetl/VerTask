@@ -1,11 +1,21 @@
 # VerTask
 
-VerTask é uma plataforma completa e centralizada de gerenciamento de tarefas que permite planejar, acompanhar, reportar andamento e concluir tarefas em equipe. Integra um backend robusto em Spring Boot, que oferece APIs seguras para autenticação, usuários e tarefas, e um frontend em Ionic/Angular pensado para uma interface web responsiva. Organize entregas, atribua responsáveis, vincule clientes e mantenha documentos centralizados, tudo em um fluxo simples e moderno.
+O VerTask é um ecossistema centralizado projetado para otimizar o ciclo de vida das demandas corporativas. Unindo a robustez de um backend em Spring Boot à flexibilidade de uma interface Ionic/Angular, a plataforma oferece uma experiência web responsiva e segura para o controle total de operações, desde o planejamento inicial até a entrega final.
 
 ## 📖 Sobre o Projeto
-O VerTask permite cadastrar e gerenciar tarefas, responsáveis, clientes e arquivos associados. O backend expõe APIs REST e o frontend entrega uma interface web responsiva construída com Ionic/Angular.
+O VerTask é uma plataforma de gerenciamento de fluxos de
+trabalho desenhada para transformar tarefas abstratas em
+processos visuais e auditáveis. O sistema centraliza a operação em
+um ecossistema digital onde cada demanda é rastreada desde a
+sua criação até a entrega final, o que facilita e melhora o trabalho em conjunto entre funcionários e gestores responsáveis por lidar com esses processos.
 
-##  Tecnologias
+### Propósito do projeto
+
+Dessa forma, o propósito é unificar todo o processo e atributos que compõe uma
+tarefa num único local: os responsáveis, o prazo, a documentação
+técnica (PDFs) necessária, um chat para troca de informações e os dados do cliente.
+
+##  🚀 Tecnologias
 
 ### Backend (API)
 - **Java** 24
