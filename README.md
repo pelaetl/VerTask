@@ -31,7 +31,7 @@ de alertas automáticos.**
 
 ### Propósito do projeto
 
-Dessa forma, o propósito é unificar todo o processo e atributos que compõe uma
+Dessa forma, a proposta do sistema é unificar todo o processo e atributos que compõe uma
 tarefa num único local: os responsáveis, o prazo, a documentação
 técnica (PDFs) necessária, um chat para troca de informações e os dados do cliente.
 
