@@ -2,6 +2,10 @@
 
 O VerTask é um ecossistema centralizado projetado para otimizar o ciclo de vida das demandas corporativas. Unindo a robustez de um backend em Spring Boot à flexibilidade de uma interface Ionic/Angular, a plataforma oferece uma experiência web responsiva e segura para o controle total de operações, desde o planejamento inicial até a entrega final.
 
+## 📹 Demonstração em Vídeo
+
+[▶️ Assistir demonstração completa do sistema](https://github.com/pelaetl/VerTask/blob/main/VideoVerTask.mp4)
+
 ## 📖 Sobre o Projeto
 O VerTask é uma plataforma de gerenciamento de fluxos de
 trabalho desenhada para transformar tarefas abstratas em
