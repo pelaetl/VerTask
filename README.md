@@ -9,6 +9,22 @@ processos visuais e auditáveis. O sistema centraliza a operação em
 um ecossistema digital onde cada demanda é rastreada desde a
 sua criação até a entrega final, o que facilita e melhora o trabalho em conjunto entre funcionários e gestores responsáveis por lidar com esses processos.
 
+Muitas organizações ainda enfrentam problemas operacionais
+devido ao uso de ferramentas fragmentadas (e-mail, WhatsApp e
+planilhas) para a gestão de tarefas. Esta falta de padronização
+resulta em:
+
+- **Dificuldade na
+monitorização do
+progresso em tempo real.**
+
+- **Falhas na comunicação
+entre gestores e
+colaboradores.**
+
+- **Atrasos críticos por falta
+de alertas automáticos.**
+
 ### Propósito do projeto
 
 Dessa forma, o propósito é unificar todo o processo e atributos que compõe uma
