@@ -4,7 +4,7 @@ O VerTask é um ecossistema centralizado projetado para otimizar o ciclo de vida
 
 ## 📹 Demonstração em Vídeo
 
-[▶️ Assistir demonstração completa do sistema](https://youtu.be/vOLgercZUsk))
+[▶️ Assistir demonstração completa do sistema](https://youtu.be/vOLgercZUsk)
 
 ## 📖 Sobre o Projeto
 O VerTask é uma plataforma de gerenciamento de fluxos de
