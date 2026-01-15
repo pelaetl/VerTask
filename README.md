@@ -179,7 +179,9 @@ cd "Vertask - Ionic"
 npm start        # Equivalente a: ionic serve
 ```
 ## 📁 Documentação Completa
-https://docs.google.com/document/d/13ZusiKqUu2w0N-FHyo3qJ9v_1SDz1HgZT4Bum5-6cgA/edit?usp=sharing
+Link: https://docs.google.com/document/d/13ZusiKqUu2w0N-FHyo3qJ9v_1SDz1HgZT4Bum5-6cgA/edit?usp=sharing
+
+📄 [Baixar Documentação em PDF](./docs/documentacao.pdf)
 
 ## 👤 Autor 
 **Desenvolvido por Pedro de Laet Leite** - [@pelaetl](https://github.com/pelaetl) - pedroll2109@gmail.com
