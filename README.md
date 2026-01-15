@@ -181,7 +181,7 @@ npm start        # Equivalente a: ionic serve
 ## 📁 Documentação Completa
 Link: https://docs.google.com/document/d/13ZusiKqUu2w0N-FHyo3qJ9v_1SDz1HgZT4Bum5-6cgA/edit?usp=sharing
 
-📄 [Baixar Documentação em PDF](https://github.com/pelaetl/VerTask/blob/main/Documentacao_do_Software_VerTask)
+📄 [Baixar Documentação em PDF (GitHub)](https://github.com/pelaetl/VerTask/raw/main/Documentacao_do_Software_VerTask.pdf)
 
 ## 👤 Autor 
 **Desenvolvido por Pedro de Laet Leite** - [@pelaetl](https://github.com/pelaetl) - pedroll2109@gmail.com
